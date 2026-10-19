@@ -1,0 +1,5 @@
+# upstream clones and archives, not part of this repo
+/OpenROAD/
+/OpenROAD-flow-scripts/
+/yosys/
+*.zip
