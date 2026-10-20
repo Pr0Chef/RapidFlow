@@ -1,0 +1,29 @@
+#Target Platform and Design Name
+export PLATFORM                   =sky130hd
+export DESIGN_NAME                =cva6
+
+export YOSYS_READ_VERILOG_PARAMS = -sv
+#YOSYS_READ_VERILOG_INTERPRETER = -sv
+export YOSYS_READ_VERILOG_COMMAND = read_verilog -sv
+
+#SystemVerilog / Verilog Source Files
+export VERILOG_FILES    = $(wildcard ./designs/src/cva6_repo/include/*_pkg.sv) \
+$(wildcard ./designs/src/cva6_repo/include/*.sv) \
+$(wildcard ./designs/src/cva6_repo/src/*.sv) \
+$(wildcard ./designs/src/cva6_repo/src/*/*.sv) \
+$(wildcard ./designs/src/cva6_repo/core/*.sv)
+
+#Timing COnstriants File
+export SDC_FILE   = ./designs/sky130hd/cva6/constraints.sdc
+
+#Clock pin and Target period (in ns)
+export CLK_NAME = clk_i
+export CLK_PERIOD  =10.0
+
+#Floorplan and Utilization Targets
+export CORE_UTILIZATION = 35
+export CORE_ASPECT_RATIO = 1.0
+export CORE_MARGIN = 15
+
+#Routing and Synthesis Tweaks 
+export DONT_USE_CELLS = sky130_fd_sc_hd__probe_* ske130_fd_sc_hd__prover_*
