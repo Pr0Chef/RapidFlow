@@ -1,0 +1,1682 @@
+/home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/flow.sh 4_1_cts cts
+Running cts.tcl, stage 4_1_cts
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_LVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_LVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_SLVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_SLVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x256.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_128x64.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x28.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x25.lib
+read_db -hier ./results/asap7/cva6/hier/3_place.odb
+[WARNING ORD-0012] Hierarchical flow (-hier) is currently in development and may cause multiple issues. Do not use in production environments.
+read_sdc ./results/asap7/cva6/hier/3_place.sdc
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets -library asap7sc7p5t_INVBUF_SLVT_FF_nldm_211120
+[INFO CTS-0210] Clock buffers will be chosen from library asap7sc7p5t_INVBUF_SLVT_FF_nldm_211120
+[INFO CTS-0050] Root buffer is BUFx24_ASAP7_75t_SL.
+[INFO CTS-0051] Sink buffer is BUFx24_ASAP7_75t_SL.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUFx24_ASAP7_75t_SL
+[INFO CTS-0049] Characterization buffer is BUFx24_ASAP7_75t_SL.
+[INFO CTS-0007] Net "clk_i" found for clock "main_clk".
+[INFO CTS-0011]  Clock net "clk_i" for macros has 8 sinks.
+[INFO CTS-0011]  Clock net "clk_i_regs" for registers has 9434 sinks.
+[INFO CTS-0008] TritonCTS found 2 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 4 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk_i.
+[INFO CTS-0028]  Total number of sinks: 8.
+[INFO CTS-0029]  Macro  sinks will be clustered in groups of up to 4 and with maximum cluster diameter of 93.6 um.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 1350  dbu (1 um).
+[INFO CTS-0023]  Original sink region: [(15174, 2316), (149038, 163404)].
+[INFO CTS-0024]  Normalized sink region: [(11.24, 1.71556), (110.399, 121.04)].
+[INFO CTS-0025]     Width:  99.1585.
+[INFO CTS-0026]     Height: 119.3244.
+ Level 1
+    Direction: Vertical
+    Sinks per sub-region: 4
+    Sub-region size: 99.1585 X 59.6622
+[INFO CTS-0034]     Segment length (rounded): 30.
+ Level 2
+    Direction: Horizontal
+    Sinks per sub-region: 2
+    Sub-region size: 49.5793 X 59.6622
+[INFO CTS-0034]     Segment length (rounded): 24.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (124.954 um) and max number of sinks is 10.
+[INFO CTS-0035]  Number of sinks covered: 8.
+[INFO CTS-0201] 4 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk_i_regs.
+[INFO CTS-0028]  Total number of sinks: 9434.
+[INFO CTS-0060]  Register sinks will be clustered in groups of up to 10 and based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 1350  dbu (1 um).
+[INFO CTS-0204] A clustering solution was found from clustering size of 10 and max clustering diameter of 43.
+[INFO CTS-0205] Better solution may be possible if either -sink_clustering_size, -sink_clustering_max_diameter, or both options are omitted to enable automatic clustering.
+[INFO CTS-0019]  Total number of sinks after clustering: 945.
+[INFO CTS-0024]  Normalized sink region: [(2.00563, 2.22607), (119.441, 120.773)].
+[INFO CTS-0025]     Width:  117.4355.
+[INFO CTS-0026]     Height: 118.5471.
+ Level 1
+    Direction: Vertical
+    Sinks per sub-region: 473
+    Sub-region size: 117.4355 X 59.2736
+[INFO CTS-0034]     Segment length (rounded): 30.
+ Level 2
+    Direction: Horizontal
+    Sinks per sub-region: 237
+    Sub-region size: 58.7178 X 59.2736
+[INFO CTS-0034]     Segment length (rounded): 30.
+ Level 3
+    Direction: Vertical
+    Sinks per sub-region: 119
+    Sub-region size: 58.7178 X 29.6368
+[INFO CTS-0034]     Segment length (rounded): 14.
+ Level 4
+    Direction: Horizontal
+    Sinks per sub-region: 60
+    Sub-region size: 29.3589 X 29.6368
+[INFO CTS-0034]     Segment length (rounded): 14.
+ Level 5
+    Direction: Vertical
+    Sinks per sub-region: 30
+    Sub-region size: 29.3589 X 14.8184
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 6
+    Direction: Horizontal
+    Sinks per sub-region: 15
+    Sub-region size: 14.6794 X 14.8184
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 7
+    Direction: Vertical
+    Sinks per sub-region: 8
+    Sub-region size: 14.6794 X 7.4092
+[INFO CTS-0034]     Segment length (rounded): 4.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (124.954 um) and max number of sinks is 10.
+[INFO CTS-0035]  Number of sinks covered: 945.
+[INFO CTS-0018]     Created 7 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 3.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 3.
+[INFO CTS-0015]     Created 7 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 2:4..
+[INFO CTS-0017]     Max level of the clock tree: 2.
+[INFO CTS-0018]     Created 1096 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 6.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 6.
+[INFO CTS-0015]     Created 1096 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 5:2, 7:79, 8:51, 9:2, 10:939..
+[INFO CTS-0017]     Max level of the clock tree: 7.
+[INFO CTS-0098] Clock net "clk_i"
+[INFO CTS-0099]  Sinks 8
+[INFO CTS-0100]  Leaf buffers 0
+[INFO CTS-0101]  Average sink wire length 291.66 um
+[INFO CTS-0102]  Path depth 3 - 3
+[INFO CTS-0207]  Dummy loads inserted 0
+[INFO CTS-0098] Clock net "clk_i_regs"
+[INFO CTS-0099]  Sinks 9519
+[INFO CTS-0100]  Leaf buffers 945
+[INFO CTS-0101]  Average sink wire length 138.76 um
+[INFO CTS-0102]  Path depth 5 - 6
+[INFO CTS-0207]  Dummy loads inserted 85
+[INFO RSZ-0047] Found 1 long wires.
+[INFO RSZ-0048] Inserted 1 buffers in 1 nets.
+[INFO CTS-0033] Balancing latency for clock main_clk
+[INFO CTS-0036]  inserted 2 delay buffers
+[INFO CTS-0037] Total number of delay buffers: 2
+[INFO CTS-0500] Runtime: 58.89s
+Took 59 seconds: clock_tree_synthesis -sink_clustering_enable -repair_clock_nets -library asap7sc7p5t_INVBUF_SLVT_FF_nldm_211120
+estimate_parasitics -placement
+Took 10 seconds: estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 26095.49 um^2
+[INFO DPL-0007] Movable instances area: 16174.43 um^2
+[INFO DPL-0008] Fixed instances area within core: 4248.54 um^2
+[INFO DPL-0009] Utilization: 78.3%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (4 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 142408 cells
+[INFO DPL-0393]   height 23 row(s): 4 cells
+[INFO DPL-0393]   height 80 row(s): 2 cells
+[INFO DPL-0393]   height 174 row(s): 2 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |      36435 |      3793 |     32642
+        1 |      27396 |      2610 |     24783
+        2 |      20465 |      1670 |     18795
+        3 |      12818 |      1048 |     11764
+        4 |       8125 |       691 |      7434
+        5 |       5416 |       467 |      4949
+        6 |       3441 |       307 |      3134
+        7 |       2111 |       211 |      1900
+        8 |       1488 |       154 |      1334
+        9 |       1256 |       122 |      1128
+       10 |        821 |        81 |       740
+       20 |        138 |        15 |       123
+       30 |         26 |         2 |        24
+       38 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 38.
+[INFO DPL-0500] Runtime: 28.25s
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves               94149
+total displacement      23430.4 u
+average displacement        0.2 u
+max displacement            3.2 u
+original HPWL          545173.1 u
+legalized HPWL         560571.3 u
+delta HPWL                    3 %
+
+Took 28 seconds: detailed_placement
+estimate_parasitics -placement
+Took 10 seconds: estimate_parasitics -placement
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove VtSwapMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 41.62s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 7.51s
+Took 49 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+detailed_placement
+[INFO DPL-0006] Core area: 26095.49 um^2
+[INFO DPL-0007] Movable instances area: 16174.43 um^2
+[INFO DPL-0008] Fixed instances area within core: 4248.54 um^2
+[INFO DPL-0009] Utilization: 78.3%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (4 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 142408 cells
+[INFO DPL-0393]   height 23 row(s): 4 cells
+[INFO DPL-0393]   height 80 row(s): 2 cells
+[INFO DPL-0393]   height 174 row(s): 2 cells
+[INFO DPL-0500] Runtime: 2.39s
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                   0
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          560571.3 u
+legalized HPWL         560571.3 u
+delta HPWL                    0 %
+
+estimate_parasitics -placement
+Took 10 seconds: estimate_parasitics -placement
+Report metrics stage 4, cts final...
+
+==========================================================================
+cts final report_design_area
+--------------------------------------------------------------------------
+Design area 20423 um^2 78% utilization.
+write_db ./results/asap7/cva6/hier/4_1_cts.odb
+write_sdc -no_timestamp ./results/asap7/cva6/hier/4_cts.sdc
+Elapsed time: 7:37.30[h:]min:sec. CPU time: user 647.96 sys 364.74 (221%). Peak memory: 1598880KB.
+Log                    Ext     Elapsed      CPU     CPU/ Peak Mem sha1sum
+                                     s        s  Elapsed       MB [0:10)
+4_1_cts                .odb        457     1013     2.21     1561 251392c98d
+cp ./results/asap7/cva6/hier/4_1_cts.odb ./results/asap7/cva6/hier/4_cts.odb
+/home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_1_grt global_route
+Running global_route.tcl, stage 5_1_grt
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_LVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_LVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_SLVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_SLVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x256.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_128x64.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x28.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x25.lib
+read_db -hier ./results/asap7/cva6/hier/4_cts.odb
+[WARNING ORD-0012] Hierarchical flow (-hier) is currently in development and may cause multiple issues. Do not use in production environments.
+read_sdc ./results/asap7/cva6/hier/4_cts.sdc
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     640
+Number of vias:       18
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net issue_stage_i.i_scoreboard/_02909_ has 133 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net flu_exception_ex_id\[0\] has 103 pins which may impact routing performance. Consider optimization.
+
+Design:                   cva6
+Die area:                 ( 0 0 ) ( 165676 165676 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     142416
+Number of terminals:      964
+Number of snets:          2
+Number of nets:           145614
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+  Complete 100000 instances.
+[INFO DRT-0164] Number of unique instances = 214.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0018]   Complete 100000 insts.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 2273303.
+[INFO DRT-0033] V1 shape region query size = 2396548.
+[INFO DRT-0033] M2 shape region query size = 88514.
+[INFO DRT-0033] V2 shape region query size = 45126.
+[INFO DRT-0033] M3 shape region query size = 45134.
+[INFO DRT-0033] V3 shape region query size = 30084.
+[INFO DRT-0033] M4 shape region query size = 34420.
+[INFO DRT-0033] V4 shape region query size = 34004.
+[INFO DRT-0033] M5 shape region query size = 19452.
+[INFO DRT-0033] V5 shape region query size = 3612.
+[INFO DRT-0033] M6 shape region query size = 1926.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0076]   Complete 2000 pins.
+[INFO DRT-0078]   Complete 2814 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 202 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0082]   Complete 30000 groups.
+[INFO DRT-0082]   Complete 40000 groups.
+[INFO DRT-0082]   Complete 50000 groups.
+[INFO DRT-0082]   Complete 60000 groups.
+[INFO DRT-0082]   Complete 70000 groups.
+[INFO DRT-0084]   Complete 74826 groups.
+#scanned instances     = 142416
+#unique  instances     = 210
+#stdCellGenAp          = 5750
+#stdCellValidPlanarAp  = 66
+#stdCellValidViaAp     = 4808
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 465775
+#instTermValidViaApCnt = 0
+#macroGenAp            = 1566
+#macroValidPlanarAp    = 1566
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 01:00:02, elapsed time = 00:09:11, memory = 1078.87 (MB), peak = 1136.45 (MB)
+Took 556 seconds: pin_access
+global_route -congestion_report_file ./reports/asap7/cva6/hier/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -resistance_aware
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 8
+[INFO GRT-0004] Blockages: 50622
+[INFO GRT-0019] Found 1108 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 133
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal     915121        652873          28.66%
+M3         Vertical      1083844        806162          25.62%
+M4         Horizontal     831131        619922          25.41%
+M5         Vertical       872754        642647          26.37%
+M6         Horizontal     662169        448925          32.20%
+M7         Vertical       748221        504305          32.60%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove congestion.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0197] Via related to pin nodes: 911305
+[INFO GRT-0198] Via related Steiner nodes: 24634
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 1201807
+[INFO GRT-0112] Final usage 3D: 4710362
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Congestion
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2              652873        361691           55.40%             0 /  0 /  0
+M3              806162        452194           56.09%             0 /  0 /  0
+M4              619922        140986           22.74%             0 /  0 /  0
+M5              642647        118677           18.47%             0 /  0 /  0
+M6              448925         19438            4.33%             0 /  0 /  0
+M7              504305         11955            2.37%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          3674834       1104941           30.07%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 852929 um
+[INFO GRT-0014] Routed nets: 144880
+[INFO GRT-0303] Global routing runtime = 00:05:16
+Took 317 seconds: global_route -congestion_report_file ./reports/asap7/cva6/hier/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -resistance_aware
+estimate_parasitics -global_routing
+Took 13 seconds: estimate_parasitics -global_routing
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    145699
+     1000 |     +0.0% |       0 |       0 |             0 |    144699
+     2000 |     +0.0% |       0 |       0 |             0 |    143699
+     3000 |     +0.0% |       0 |       0 |             0 |    142699
+     4000 |     +0.0% |       0 |       0 |             0 |    141699
+     5000 |     +0.0% |       0 |       0 |             0 |    140699
+     6000 |     +0.0% |       0 |       0 |             0 |    139699
+     7000 |     +0.0% |       0 |       0 |             0 |    138699
+     8000 |     +0.0% |       0 |       0 |             0 |    137699
+     9000 |     +0.0% |       0 |       0 |             0 |    136699
+    10000 |     +0.0% |       0 |       0 |             0 |    135699
+    11000 |     +0.0% |       0 |       0 |             0 |    134699
+    12000 |     +0.0% |       0 |       0 |             0 |    133699
+    13000 |     +0.0% |       0 |       0 |             0 |    132699
+    14000 |     +0.0% |       0 |       0 |             0 |    131699
+    15000 |     +0.0% |       0 |       0 |             0 |    130699
+    16000 |     +0.0% |       0 |       0 |             0 |    129699
+    17000 |     +0.0% |       0 |       0 |             0 |    128699
+    18000 |     +0.0% |       0 |       0 |             0 |    127699
+    19000 |     +0.0% |       0 |       0 |             0 |    126699
+    20000 |     +0.0% |       0 |       0 |             0 |    125699
+    21000 |     +0.0% |       0 |       0 |             0 |    124699
+    22000 |     +0.0% |       0 |       0 |             0 |    123699
+    23000 |     +0.0% |       0 |       0 |             0 |    122699
+    24000 |     +0.0% |       0 |       0 |             0 |    121699
+    25000 |     +0.0% |       0 |       0 |             0 |    120699
+[WARNING RSZ-0104] Net _00327_ only has one pin. Check if it is intended to be dangling.
+    26000 |     +0.0% |       0 |       0 |             0 |    119699
+    27000 |     +0.0% |       0 |       0 |             0 |    118699
+    28000 |     +0.0% |       0 |       0 |             0 |    117699
+    29000 |     +0.0% |       0 |       0 |             0 |    116699
+    30000 |     +0.0% |       0 |       0 |             0 |    115699
+    31000 |     +0.0% |       0 |       0 |             0 |    114699
+    32000 |     +0.0% |       0 |       0 |             0 |    113699
+    33000 |     +0.0% |       0 |       0 |             0 |    112699
+    34000 |     +0.0% |       0 |       0 |             0 |    111699
+    35000 |     +0.0% |       0 |       0 |             0 |    110699
+    36000 |     +0.0% |       0 |       0 |             0 |    109699
+    37000 |     +0.0% |       0 |       0 |             0 |    108699
+    38000 |     +0.0% |       0 |       0 |             0 |    107699
+    39000 |     +0.0% |       0 |       0 |             0 |    106699
+    40000 |     +0.0% |       0 |       0 |             0 |    105699
+    41000 |     +0.0% |       0 |       0 |             0 |    104699
+    42000 |     +0.0% |       0 |       0 |             0 |    103699
+    43000 |     +0.0% |       0 |       0 |             0 |    102699
+    44000 |     +0.0% |       0 |       0 |             0 |    101699
+    45000 |     +0.0% |       0 |       0 |             0 |    100699
+    46000 |     +0.0% |       0 |       0 |             0 |     99699
+    47000 |     +0.0% |       0 |       0 |             0 |     98699
+    48000 |     +0.0% |       0 |       0 |             0 |     97699
+    49000 |     +0.0% |       0 |       0 |             0 |     96699
+[WARNING RSZ-0104] Net ex_stage_i/_00152_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00156_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00180_ only has one pin. Check if it is intended to be dangling.
+    50000 |     +0.0% |       0 |       0 |             0 |     95699
+    51000 |     +0.0% |       0 |       0 |             0 |     94699
+[WARNING RSZ-0104] Net ex_stage_i/_00827_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00182_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00825_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00819_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00871_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00707_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00128_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00136_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00140_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00144_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00492_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00510_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00160_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00164_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00168_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00176_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00618_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00130_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00142_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00146_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00154_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00158_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00162_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00166_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00178_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00863_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00869_ only has one pin. Check if it is intended to be dangling.
+    52000 |     +0.0% |       0 |       0 |             0 |     93699
+[WARNING RSZ-0104] Net ex_stage_i/_00039_ only has one pin. Check if it is intended to be dangling.
+    53000 |     +0.0% |       0 |       0 |             0 |     92699
+    54000 |     +0.0% |       0 |       0 |             0 |     91699
+[WARNING RSZ-0104] Net ex_stage_i/_00272_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00266_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00851_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00835_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00274_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00626_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00624_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00286_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00737_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00821_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00258_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00112_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00534_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00526_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00616_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00304_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00356_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00332_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00516_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00480_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00552_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00580_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00588_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00606_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00570_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00598_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00562_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00669_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00673_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00677_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00681_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00687_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00689_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00691_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00695_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00697_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00703_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00705_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01029_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00711_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00713_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00719_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00721_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00723_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00727_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00729_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00735_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00296_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00114_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00122_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00374_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00132_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00420_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00438_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00456_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00148_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00528_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00546_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00564_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00172_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00600_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00126_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00392_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00134_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00446_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00464_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00150_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00500_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00518_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00536_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00554_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00174_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00608_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00268_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00318_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00865_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00302_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00280_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00298_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00288_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00316_ only has one pin. Check if it is intended to be dangling.
+    55000 |     +0.0% |       0 |       0 |             0 |     90699
+[WARNING RSZ-0104] Net ex_stage_i/_00035_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00041_ only has one pin. Check if it is intended to be dangling.
+    56000 |     +0.0% |       0 |       0 |             0 |     89699
+[WARNING RSZ-0104] Net issue_stage_i.i_scoreboard/_00045_ only has one pin. Check if it is intended to be dangling.
+    57000 |     +0.0% |       0 |       0 |             0 |     88699
+[WARNING RSZ-0104] Net ex_stage_i/_00855_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00282_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00833_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01149_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00955_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00963_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00971_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00979_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00987_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00995_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01003_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01011_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01019_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00312_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00372_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00462_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00490_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00498_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00454_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00508_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00472_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00544_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00671_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00813_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00885_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00909_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00683_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00685_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00949_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00957_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00965_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00693_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00981_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00989_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00699_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00701_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01013_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01021_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00709_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01045_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01053_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00715_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00717_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01077_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01085_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01093_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00725_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01109_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01117_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00731_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00733_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01141_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00116_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00334_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00402_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00474_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00582_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00118_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00358_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00410_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00138_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00482_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00590_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00849_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00310_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00857_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00839_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00841_ only has one pin. Check if it is intended to be dangling.
+    58000 |     +0.0% |       0 |       0 |             0 |     87699
+    59000 |     +0.0% |       0 |       0 |             0 |     86699
+    60000 |     +0.0% |       0 |       0 |             0 |     85699
+[WARNING RSZ-0104] Net ex_stage_i/_01147_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00444_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00436_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00667_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00811_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00883_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00907_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00921_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00939_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00947_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01091_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01099_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01107_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01115_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01123_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01131_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01139_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00400_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00408_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00426_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00390_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00418_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00923_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00941_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00973_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00997_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01005_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01037_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01061_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01069_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01101_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01125_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01133_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00260_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00428_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00170_ only has one pin. Check if it is intended to be dangling.
+    61000 |     +0.0% |       0 |       0 |             0 |     84699
+    62000 |     +0.0% |       0 |       0 |             0 |     83699
+    63000 |     +0.0% |       0 |       0 |             0 |     82699
+    64000 |     +0.0% |       0 |       0 |             0 |     81699
+[WARNING RSZ-0104] Net ex_stage_i/_00679_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00675_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01027_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01035_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01043_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01051_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01059_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01067_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01075_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_01083_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00124_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00120_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/_00572_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00021_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00019_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00023_ only has one pin. Check if it is intended to be dangling.
+    65000 |     +0.0% |       0 |       0 |             0 |     80699
+    66000 |     +0.0% |       0 |       0 |             0 |     79699
+    67000 |     +0.0% |       0 |       0 |             0 |     78699
+    68000 |     +0.0% |       0 |       0 |             0 |     77699
+[WARNING RSZ-0104] Net _00005_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00003_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00007_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00017_ only has one pin. Check if it is intended to be dangling.
+    69000 |     +0.0% |       0 |       0 |             0 |     76699
+    70000 |     +0.0% |       0 |       0 |             0 |     75699
+    71000 |     +0.0% |       0 |       0 |             0 |     74699
+    72000 |     +0.0% |       0 |       0 |             0 |     73699
+    73000 |     +0.0% |       0 |       0 |             0 |     72699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00132_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00136_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00140_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00144_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00188_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00208_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00224_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00001_ only has one pin. Check if it is intended to be dangling.
+    74000 |     +0.0% |       0 |       0 |             0 |     71699
+    75000 |     +0.0% |       0 |       0 |             0 |     70699
+    76000 |     +0.0% |       0 |       0 |             0 |     69699
+    77000 |     +0.0% |       0 |       0 |             0 |     68699
+    78000 |     +0.0% |       0 |       0 |             0 |     67699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00112_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00124_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00128_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00156_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00164_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00168_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00192_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00196_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00200_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00220_ only has one pin. Check if it is intended to be dangling.
+    79000 |     +0.0% |       0 |       0 |             0 |     66699
+    80000 |     +0.0% |       0 |       0 |             0 |     65699
+    81000 |     +0.0% |       0 |       0 |             0 |     64699
+    82000 |     +0.0% |       0 |       0 |             0 |     63699
+    83000 |     +0.0% |       0 |       0 |             0 |     62699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00120_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00148_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00152_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00160_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00176_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00204_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00212_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00216_ only has one pin. Check if it is intended to be dangling.
+    84000 |     +0.0% |       0 |       0 |             0 |     61699
+    85000 |     +0.0% |       0 |       0 |             0 |     60699
+    86000 |     +0.0% |       0 |       0 |             0 |     59699
+    87000 |     +0.0% |       0 |       0 |             0 |     58699
+    88000 |     +0.0% |       0 |       0 |             0 |     57699
+    89000 |     +0.0% |       0 |       0 |             0 |     56699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00081_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00232_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00116_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00172_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00180_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00184_ only has one pin. Check if it is intended to be dangling.
+    90000 |     +0.0% |       0 |       0 |             0 |     55699
+    91000 |     +0.0% |       0 |       0 |             0 |     54699
+    92000 |     +0.0% |       0 |       0 |             0 |     53699
+    93000 |     +0.0% |       0 |       0 |             0 |     52699
+    94000 |     +0.0% |       0 |       0 |             0 |     51699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00041_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00228_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00110_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00003_ only has one pin. Check if it is intended to be dangling.
+    95000 |     +0.0% |       0 |       0 |             0 |     50699
+    96000 |     +0.0% |       0 |       0 |             0 |     49699
+    97000 |     +0.0% |       0 |       0 |             0 |     48699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00248_ only has one pin. Check if it is intended to be dangling.
+    98000 |     +0.0% |       0 |       0 |             0 |     47699
+    99000 |     +0.0% |       0 |       0 |             0 |     46699
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0017_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0039_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0025_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0031_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0029_ only has one pin. Check if it is intended to be dangling.
+   100000 |     +0.0% |       0 |       0 |             0 |     45699
+[WARNING RSZ-0104] Net csr_regfile_i/_00005_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00021_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00113_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00013_ only has one pin. Check if it is intended to be dangling.
+   101000 |     +0.0% |       0 |       0 |             0 |     44699
+   102000 |     +0.0% |       0 |       0 |             0 |     43699
+   103000 |     +0.0% |       0 |       0 |             0 |     42699
+   104000 |     +0.0% |       0 |       0 |             0 |     41699
+[WARNING RSZ-0104] Net _00340_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net issue_stage_i.i_scoreboard/_00042_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00085_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0037_ only has one pin. Check if it is intended to be dangling.
+   105000 |     +0.0% |       0 |       0 |             0 |     40699
+[WARNING RSZ-0104] Net csr_regfile_i/_00007_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00001_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00019_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00017_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net csr_regfile_i/_00015_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00343_ only has one pin. Check if it is intended to be dangling.
+   106000 |     +0.0% |       0 |       0 |             0 |     39699
+   107000 |     +0.0% |       0 |       0 |             0 |     38699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00237_ only has one pin. Check if it is intended to be dangling.
+   108000 |     +0.0% |       0 |       0 |             0 |     37699
+[WARNING RSZ-0104] Net issue_stage_i.i_scoreboard/_00010_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00073_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00081_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00051_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00079_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00049_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00077_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00089_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00091_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00085_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00083_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00061_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00069_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00065_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00059_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00053_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00075_ only has one pin. Check if it is intended to be dangling.
+   109000 |     +0.0% |       0 |       0 |             0 |     36699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hwpf_stride_wrapper/_00589_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hwpf_stride_wrapper/_00215_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hwpf_stride_wrapper/_00409_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hwpf_stride_wrapper/_00249_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/hpdcache_ctrl_i.hpdcache_memctrl_i/_0001_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00079_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00035_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00019_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00051_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00041_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00025_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00057_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00033_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00017_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00049_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00047_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00031_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00063_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00037_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00021_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00053_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00045_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00029_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00061_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00039_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00023_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00055_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00043_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00027_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00059_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00083_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00240_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00258_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00236_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00003_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00007_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/_0041_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0003_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0023_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0015_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0021_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0009_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0027_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0011_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00011_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00013_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00015_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00126_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00128_ only has one pin. Check if it is intended to be dangling.
+   110000 |     +0.0% |       0 |       0 |             0 |     35699
+[WARNING RSZ-0104] Net i_frontend.i_instr_queue/_00062_ only has one pin. Check if it is intended to be dangling.
+   111000 |     +0.0% |       0 |       0 |             0 |     34699
+   112000 |     +0.0% |       0 |       0 |             0 |     33699
+   113000 |     +0.0% |       0 |       0 |             0 |     32699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hwpf_stride_wrapper/_00213_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hwpf_stride_wrapper/_00247_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00003_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00009_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00001_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00015_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00005_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00013_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00007_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/gen_wbuf.hpdcache_wbuf_i/_00011_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_dcache.i_hpdcache/_00252_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _00479_ only has one pin. Check if it is intended to be dangling.
+   114000 |     +0.0% |       0 |       0 |             0 |     31699
+   115000 |     +0.0% |       0 |       0 |             0 |     30699
+   116000 |     +0.0% |       0 |       0 |             0 |     29699
+   117000 |     +0.0% |       0 |       0 |             0 |     28699
+[WARNING RSZ-0104] Net ex_stage_i/lsu_i.i_store_unit.store_buffer_i/_0004_ only has one pin. Check if it is intended to be dangling.
+   118000 |     +0.0% |       0 |       0 |             0 |     27699
+   119000 |     +0.0% |       0 |       0 |             0 |     26699
+   120000 |     +0.0% |       0 |       0 |             0 |     25699
+   121000 |     +0.0% |       0 |       0 |             0 |     24699
+   122000 |     +0.0% |       0 |       0 |             0 |     23699
+   123000 |     +0.0% |       0 |       0 |             0 |     22699
+   124000 |     +0.0% |       0 |       0 |             0 |     21699
+   125000 |     +0.0% |       0 |       0 |             0 |     20699
+   126000 |     +0.0% |       0 |       0 |             0 |     19699
+   127000 |     +0.0% |       0 |       0 |             0 |     18699
+   128000 |     +0.0% |       0 |       0 |             0 |     17699
+   129000 |     +0.0% |       0 |       0 |             0 |     16699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[137\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[227\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[226\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[225\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[224\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[223\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[222\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[221\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[220\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[219\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[218\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[136\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[217\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[216\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[215\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[214\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[213\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[212\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[211\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[210\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[209\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[208\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[135\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[207\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[206\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[205\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[204\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[203\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[202\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[201\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[200\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[199\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[198\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[134\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[197\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[196\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[195\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[194\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[193\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[192\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[191\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[190\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[189\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[188\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[133\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[187\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[186\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[185\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[184\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[183\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[182\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[181\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[180\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[179\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[178\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[132\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[177\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[176\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[175\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[174\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[173\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[172\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[171\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[170\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[169\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[168\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[131\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[167\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[166\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[165\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[164\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[163\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[162\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[161\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[160\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[159\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[158\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[130\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[157\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[156\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[155\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[154\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[153\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[152\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[151\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[150\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[149\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[148\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[129\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[147\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[146\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[145\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[144\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[143\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[142\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[141\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[140\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[255\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[254\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[253\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[252\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[251\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[250\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[249\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[248\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[139\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[247\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[246\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[245\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[244\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[243\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[242\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[241\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[240\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[239\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[238\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[138\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[237\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[236\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[235\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[234\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[233\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[232\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[231\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[230\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[229\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[228\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[128\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[9\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[99\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[98\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[97\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[96\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[95\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[94\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[93\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[92\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[91\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[90\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[8\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[89\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[88\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[87\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[86\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[85\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[84\] only has one pin. Check if it is intended to be dangling.
+   130000 |     +0.0% |       0 |       0 |             0 |     15699
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[83\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[82\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[81\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[80\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[7\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[79\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[78\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[77\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[76\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[75\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[74\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[73\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[72\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[71\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[70\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[6\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[69\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[68\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[67\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[66\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[65\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[64\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[63\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[62\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[61\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[60\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[5\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[59\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[58\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[57\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[56\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[55\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[54\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[53\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[52\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[51\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[50\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[4\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[49\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[48\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[47\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[46\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[45\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[44\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[43\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[42\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[41\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[40\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[3\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[39\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[38\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[37\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[36\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[35\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[34\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[33\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[32\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[31\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[30\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[2\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[29\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[28\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[27\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[26\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[25\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[24\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[23\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[22\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[21\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[20\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[1\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[19\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[18\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[17\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[16\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[15\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[14\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[13\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[12\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[127\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[126\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[125\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[124\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[123\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[122\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[121\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[120\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[11\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[119\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[118\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[117\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[116\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[115\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[114\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[113\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[112\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[111\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[110\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[10\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[109\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[108\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[107\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[106\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[105\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[104\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[103\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[102\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[101\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[100\] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net gen_cache_hpd.i_cache_subsystem.i_cva6_icache/cl_ruser\[0\] only has one pin. Check if it is intended to be dangling.
+   131000 |     +0.0% |       0 |       0 |             0 |     14699
+[WARNING RSZ-0104] Net _00481_ only has one pin. Check if it is intended to be dangling.
+   132000 |     +0.0% |       0 |       0 |             0 |     13699
+   133000 |     +0.0% |       0 |       0 |             0 |     12699
+   134000 |     +0.0% |       0 |       0 |             0 |     11699
+   135000 |     +0.0% |       0 |       0 |             0 |     10699
+   136000 |     +0.0% |       0 |       0 |             0 |      9699
+   137000 |     +0.0% |       0 |       0 |             0 |      8699
+   138000 |     +0.0% |       0 |       0 |             0 |      7699
+   139000 |     +0.0% |       0 |       0 |             0 |      6699
+   140000 |     +0.0% |       0 |       0 |             0 |      5699
+   141000 |     +0.0% |       0 |       0 |             0 |      4699
+   142000 |     +0.0% |       0 |       0 |             0 |      3699
+   143000 |     +0.0% |       0 |       0 |             0 |      2699
+   144000 |     +0.0% |       0 |       0 |             0 |      1699
+   145000 |     +0.0% |       0 |       0 |             0 |       699
+[WARNING RSZ-0104] Net noc_resp_i[9] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[8] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[7] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[6] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[5] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[4] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[3] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[33] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[31] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[30] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[2] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[29] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[28] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[27] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[26] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[25] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[24] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[23] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[22] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[21] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[20] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[1] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[19] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[18] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[17] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[16] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[15] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[14] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[13] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[135] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[134] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[133] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[132] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[131] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[130] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[12] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[129] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[128] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[127] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[126] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[125] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[124] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[123] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[122] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[121] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[120] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[11] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[119] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[118] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[117] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[116] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[115] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[114] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[113] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[112] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[111] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[110] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[10] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[109] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[108] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[107] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[106] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[105] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[104] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net noc_resp_i[0] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net ipi_i only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net debug_req_i only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[74] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[72] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[71] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[70] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[69] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[68] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[67] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[66] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[65] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[64] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[63] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[62] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[61] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[60] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[59] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[58] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[57] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[56] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[55] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[54] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[53] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[52] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[51] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[50] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[49] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[48] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[47] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[46] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[45] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[44] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[43] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[42] only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net cvxif_resp_i[41] only has one pin. Check if it is intended to be dangling.
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 97.77s
+Took 98 seconds: repair_design -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 26095.49 um^2
+[INFO DPL-0007] Movable instances area: 16174.43 um^2
+[INFO DPL-0008] Fixed instances area within core: 4248.54 um^2
+[INFO DPL-0009] Utilization: 78.3%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (4 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 142408 cells
+[INFO DPL-0393]   height 23 row(s): 4 cells
+[INFO DPL-0393]   height 80 row(s): 2 cells
+[INFO DPL-0393]   height 174 row(s): 2 cells
+[INFO DPL-0500] Runtime: 2.83s
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                   0
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          560571.3 u
+legalized HPWL         560571.3 u
+delta HPWL                    0 %
+
+global_route -end_incremental -resistance_aware -congestion_report_file ./reports/asap7/cva6/hier/congestion_post_repair_design.rpt
+Repair setup and hold violations...
+estimate_parasitics -global_routing
+Took 14 seconds: estimate_parasitics -global_routing
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove VtSwapMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 34.37s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 7.97s
+Took 42 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 26095.49 um^2
+[INFO DPL-0007] Movable instances area: 16174.43 um^2
+[INFO DPL-0008] Fixed instances area within core: 4248.54 um^2
+[INFO DPL-0009] Utilization: 78.3%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (4 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 142408 cells
+[INFO DPL-0393]   height 23 row(s): 4 cells
+[INFO DPL-0393]   height 80 row(s): 2 cells
+[INFO DPL-0393]   height 174 row(s): 2 cells
+[INFO DPL-0500] Runtime: 2.93s
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                   0
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          560571.3 u
+legalized HPWL         560571.3 u
+delta HPWL                    0 %
+
+check_placement -verbose
+global_route -end_incremental -resistance_aware -congestion_report_file ./reports/asap7/cva6/hier/congestion_post_repair_timing.rpt
+estimate_parasitics -global_routing
+Took 14 seconds: estimate_parasitics -global_routing
+repair_timing -setup -sequence "vt_swap reroute" -skip_last_gasp -repair_tns 0 -verbose
+[INFO RSZ-0100] Repair move sequence: VtSwapMove RerouteMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 34.60s
+Took 34 seconds: repair_timing -setup -sequence "vt_swap reroute" -skip_last_gasp -repair_tns 0 -verbose
+Repair antennas...
+[WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Estimate parasitics...
+estimate_parasitics -global_routing
+Took 18 seconds: estimate_parasitics -global_routing
+Report metrics stage 5, global route...
+
+==========================================================================
+global route report_design_area
+--------------------------------------------------------------------------
+Design area 20423 um^2 78% utilization.
+[INFO FLW-0007] clock main_clk period 5000.000000
+[INFO FLW-0008] Clock main_clk period 1615.616
+[INFO FLW-0009] Clock main_clk slack 3299.351
+write_sdc -no_timestamp ./results/asap7/cva6/hier/updated_clks.sdc
+[INFO FLW-0011] Path endpoint path count 20398
+write_db ./results/asap7/cva6/hier/5_1_grt.odb
+Took 8 seconds: write_db ./results/asap7/cva6/hier/5_1_grt.odb
+write_sdc -no_timestamp ./results/asap7/cva6/hier/5_1_grt.sdc
+Elapsed time: 23:59.78[h:]min:sec. CPU time: user 4016.24 sys 1663.13 (394%). Peak memory: 2845128KB.
+Log                    Ext     Elapsed      CPU     CPU/ Peak Mem sha1sum
+                                     s        s  Elapsed       MB [0:10)
+5_1_grt                .odb       1439     5679     3.94     2778 7c2c05c29d
+5_1_grt                .sdc                                       5303ed755b
+/home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_2_route detail_route
+Running detail_route.tcl, stage 5_2_route
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_LVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_LVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_SLVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_SLVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x256.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_128x64.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x28.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x25.lib
+read_db -hier ./results/asap7/cva6/hier/5_1_grt.odb
+[WARNING ORD-0012] Hierarchical flow (-hier) is currently in development and may cause multiple issues. Do not use in production environments.
+read_sdc ./results/asap7/cva6/hier/5_1_grt.sdc
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+detailed_route -output_drc ./reports/asap7/cva6/hier/5_route_drc.rpt -output_maze ./results/asap7/cva6/hier/maze.log -droute_end_iter 64 -verbose 1 -drc_report_iter_step 5
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     640
+Number of vias:       18
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net issue_stage_i.i_scoreboard/_02909_ has 133 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net flu_exception_ex_id\[0\] has 103 pins which may impact routing performance. Consider optimization.
+
+Design:                   cva6
+Die area:                 ( 0 0 ) ( 165676 165676 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     142416
+Number of terminals:      964
+Number of snets:          2
+Number of nets:           145614
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+  Complete 100000 instances.
+[INFO DRT-0164] Number of unique instances = 214.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0018]   Complete 100000 insts.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 2273303.
+[INFO DRT-0033] V1 shape region query size = 2396548.
+[INFO DRT-0033] M2 shape region query size = 88514.
+[INFO DRT-0033] V2 shape region query size = 45126.
+[INFO DRT-0033] M3 shape region query size = 45134.
+[INFO DRT-0033] V3 shape region query size = 30084.
+[INFO DRT-0033] M4 shape region query size = 34420.
+[INFO DRT-0033] V4 shape region query size = 34004.
+[INFO DRT-0033] M5 shape region query size = 19452.
+[INFO DRT-0033] V5 shape region query size = 3612.
+[INFO DRT-0033] M6 shape region query size = 1926.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0076]   Complete 2000 pins.
+[INFO DRT-0078]   Complete 2814 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 202 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0082]   Complete 30000 groups.
+[INFO DRT-0082]   Complete 40000 groups.
+[INFO DRT-0082]   Complete 50000 groups.
+[INFO DRT-0082]   Complete 60000 groups.
+[INFO DRT-0082]   Complete 70000 groups.
+[INFO DRT-0084]   Complete 74826 groups.
+#scanned instances     = 142416
+#unique  instances     = 210
+#stdCellGenAp          = 5750
+#stdCellValidPlanarAp  = 66
+#stdCellValidViaAp     = 4808
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 465775
+#instTermValidViaApCnt = 0
+#macroGenAp            = 1566
+#macroValidPlanarAp    = 1566
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 01:01:37, elapsed time = 00:09:30, memory = 1686.51 (MB), peak = 1745.88 (MB)
+[INFO DRT-0156] guideIn read 100000 guides.
+[INFO DRT-0156] guideIn read 200000 guides.
+[INFO DRT-0156] guideIn read 300000 guides.
+[INFO DRT-0156] guideIn read 400000 guides.
+[INFO DRT-0156] guideIn read 500000 guides.
+[INFO DRT-0156] guideIn read 600000 guides.
+[INFO DRT-0156] guideIn read 700000 guides.
+[INFO DRT-0156] guideIn read 800000 guides.
+[INFO DRT-0156] guideIn read 900000 guides.
+[INFO DRT-0156] guideIn read 1000000 guides.
+
+[INFO DRT-0157] Number of guides:     1251322
+
+[INFO DRT-0169] Post process guides.
+[INFO DRT-0176] GCELLGRID X 0 DO 290 STEP 570 ;
+[INFO DRT-0177] GCELLGRID Y 0 DO 290 STEP 570 ;
+[INFO DRT-0026]   Complete 100000 origin guides.
+[INFO DRT-0026]   Complete 200000 origin guides.
+[INFO DRT-0026]   Complete 300000 origin guides.
+[INFO DRT-0026]   Complete 400000 origin guides.
+[INFO DRT-0026]   Complete 500000 origin guides.
+[INFO DRT-0026]   Complete 600000 origin guides.
+[INFO DRT-0026]   Complete 700000 origin guides.
+[INFO DRT-0026]   Complete 800000 origin guides.
+[INFO DRT-0026]   Complete 900000 origin guides.
+[INFO DRT-0027]   Complete 1000000 origin guides.
+[INFO DRT-0028]   Complete Active.
+[INFO DRT-0028]   Complete V0.
+[INFO DRT-0028]   Complete M1.
+[INFO DRT-0028]   Complete V1.
+[INFO DRT-0028]   Complete M2.
+[INFO DRT-0028]   Complete V2.
+[INFO DRT-0028]   Complete M3.
+[INFO DRT-0028]   Complete V3.
+[INFO DRT-0028]   Complete M4.
+[INFO DRT-0028]   Complete V4.
+[INFO DRT-0028]   Complete M5.
+[INFO DRT-0028]   Complete V5.
+[INFO DRT-0028]   Complete M6.
+[INFO DRT-0028]   Complete V6.
+[INFO DRT-0028]   Complete M7.
+[INFO DRT-0028]   Complete V7.
+[INFO DRT-0028]   Complete M8.
+[INFO DRT-0028]   Complete V8.
+[INFO DRT-0028]   Complete M9.
+[INFO DRT-0028]   Complete V9.
+[INFO DRT-0028]   Complete Pad.
+  complete 100000 nets.
+[INFO DRT-0178] Init guide query.
+[INFO DRT-0029]   Complete 100000 nets (guide).
+[INFO DRT-0035]   Complete Active (guide).
+[INFO DRT-0035]   Complete V0 (guide).
+[INFO DRT-0035]   Complete M1 (guide).
+[INFO DRT-0035]   Complete V1 (guide).
+[INFO DRT-0035]   Complete M2 (guide).
+[INFO DRT-0035]   Complete V2 (guide).
+[INFO DRT-0035]   Complete M3 (guide).
+[INFO DRT-0035]   Complete V3 (guide).
+[INFO DRT-0035]   Complete M4 (guide).
+[INFO DRT-0035]   Complete V4 (guide).
+[INFO DRT-0035]   Complete M5 (guide).
+[INFO DRT-0035]   Complete V5 (guide).
+[INFO DRT-0035]   Complete M6 (guide).
+[INFO DRT-0035]   Complete V6 (guide).
+[INFO DRT-0035]   Complete M7 (guide).
+[INFO DRT-0035]   Complete V7 (guide).
+[INFO DRT-0035]   Complete M8 (guide).
+[INFO DRT-0035]   Complete V8 (guide).
+[INFO DRT-0035]   Complete M9 (guide).
+[INFO DRT-0035]   Complete V9 (guide).
+[INFO DRT-0035]   Complete Pad (guide).
+[INFO DRT-0036] Active guide region query size = 0.
+[INFO DRT-0036] V0 guide region query size = 0.
+[INFO DRT-0036] M1 guide region query size = 393732.
+[INFO DRT-0036] V1 guide region query size = 0.
+[INFO DRT-0036] M2 guide region query size = 366270.
+[INFO DRT-0036] V2 guide region query size = 0.
+[INFO DRT-0036] M3 guide region query size = 196656.
+[INFO DRT-0036] V3 guide region query size = 0.
+[INFO DRT-0036] M4 guide region query size = 29732.
+[INFO DRT-0036] V4 guide region query size = 0.
+[INFO DRT-0036] M5 guide region query size = 13348.
+[INFO DRT-0036] V5 guide region query size = 0.
+[INFO DRT-0036] M6 guide region query size = 4612.
+[INFO DRT-0036] V6 guide region query size = 0.
+[INFO DRT-0036] M7 guide region query size = 2075.
+[INFO DRT-0036] V7 guide region query size = 0.
+[INFO DRT-0036] M8 guide region query size = 0.
+[INFO DRT-0036] V8 guide region query size = 0.
+[INFO DRT-0036] M9 guide region query size = 0.
+[INFO DRT-0036] V9 guide region query size = 0.
+[INFO DRT-0036] Pad guide region query size = 0.
+[INFO DRT-0179] Init gr pin query.
+[INFO DRT-0267] cpu time = 00:00:10, elapsed time = 00:00:03, memory = 2131.31 (MB), peak = 2130.53 (MB)
+[INFO DRT-0245] skipped writing guide updates to database.
+[INFO DRT-0181] Start track assignment.
+[INFO DRT-0184] Done with 605811 vertical wires in 6 frboxes and 400614 horizontal wires in 6 frboxes.
+[INFO DRT-0186] Done with 86205 vertical wires in 6 frboxes and 127531 horizontal wires in 6 frboxes.
+[INFO DRT-0182] Complete track assignment.
+[INFO DRT-0267] cpu time = 00:05:56, elapsed time = 00:01:53, memory = 4445.73 (MB), peak = 4445.05 (MB)
+[INFO DRT-0187] Start routing data preparation.
+[INFO DRT-0267] cpu time = 00:00:01, elapsed time = 00:00:01, memory = 4445.73 (MB), peak = 4445.05 (MB)
+[INFO DRT-0194] Start detail routing.
+[INFO DRT-0195] Start 0th optimization iteration.
+    Completing 10% with 0 violations.
+    elapsed time = 00:04:39, memory = 6888.41 (MB).

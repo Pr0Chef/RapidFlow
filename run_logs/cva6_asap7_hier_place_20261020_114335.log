@@ -1,0 +1,129 @@
+/home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_1_floorplan floorplan
+Running floorplan.tcl, stage 2_1_floorplan
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+Took 8 seconds: read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+Took 5 seconds: read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_LVT_FF_nldm_211120.lib.gz
+Took 5 seconds: read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_LVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_LVT_FF_nldm_211120.lib.gz
+Took 5 seconds: read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_LVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_LVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_SLVT_FF_nldm_211120.lib.gz
+Took 7 seconds: read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_SLVT_FF_nldm_220122.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_SLVT_FF_nldm_211120.lib.gz
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_SLVT_FF_nldm_220123.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x256.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_128x64.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x28.lib
+read_liberty /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x25.lib
+read_db -hier ./results/asap7/cva6/hier/1_synth.odb
+[WARNING ORD-0012] Hierarchical flow (-hier) is currently in development and may cause multiple issues. Do not use in production environments.
+Took 15 seconds: read_db -hier ./results/asap7/cva6/hier/1_synth.odb
+read_sdc ./results/asap7/cva6/hier/1_synth.sdc
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+Warning: There are 330 input ports missing set_input_delay.
+Warning: There are 467 output ports missing set_output_delay.
+Warning: There are 469 unconstrained endpoints.
+number instances in verilog is 115591
+initialize_floorplan -utilization 70 -aspect_ratio 1.0 -core_space 2 -site asap7sc7p5t
+[INFO IFP-0107] Defining die area using utilization: 70.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.052, 2.160).
+[INFO IFP-0001] Added 598 rows of 2993 site asap7sc7p5t.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 165.676 165.676 ) um
+[INFO IFP-0101] Core BBox: (  2.052  2.160 ) ( 163.674 163.620 ) um
+[INFO IFP-0102] Core area:                        26095.488 um^2
+[INFO IFP-0103] Total instances area:             18297.431 um^2
+[INFO IFP-0104] Effective utilization:                0.701
+[INFO IFP-0105] Number of instances:                 115493
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/openRoad/make_tracks.tcl
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/fastroute.tcl
+set_dont_use "*x1p*_ASAP7* *xp*_ASAP7* SDF* ICG*"
+repair_tie_fanout -separation 0 asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/TIELOx1_ASAP7_75t_R/L
+[INFO RSZ-0042] Inserted 3742 tie TIELOx1_ASAP7_75t_R instances.
+repair_tie_fanout -separation 0 asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/TIEHIx1_ASAP7_75t_R/H
+[INFO RSZ-0042] Inserted 7667 tie TIEHIx1_ASAP7_75t_R instances.
+replace_arith_modules
+replace_arith_modules -path_count 1000 -target setup -slack_threshold 0.0
+[INFO RSZ-0151] Starting arithmetic module replacement to optimize 'setup' target
+[INFO RSZ-0152] Analyzing 1000 critical paths with slack < 0.00
+[INFO RSZ-0153] Identified 7459 violating endpoints
+[INFO RSZ-0154] Identified 0 critical arithmetic instances
+Took 7 seconds: replace_arith_modules
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove VtSwapMove 
+[INFO RSZ-0094] Found 7459 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 7459 out of 7459 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |    TNS     |  Viol  |  Worst
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            | Endpts | Endpoint
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -3330.601 | -12154635.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[481\]$_DFF_PN0_/D
+      10* |       0 |       9 |        0 |      0 |     0 |    +0.0% | -2718.098 | -10021580.0 |   7459 | id_stage_i.issue_entry_o\[481\]$_DFFE_PN0P_/D
+      20* |       0 |      11 |        0 |      0 |     8 |    +0.0% | -2633.352 | -9941137.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[481\]$_DFF_PN0_/D
+      30* |       0 |      16 |        0 |      0 |    13 |    +0.0% | -2612.027 | -9895471.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+      40* |       0 |      26 |        0 |      0 |    13 |    +0.0% | -2576.487 | -9840946.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+      50* |       0 |      33 |        0 |      0 |    16 |    +0.0% | -2475.420 | -9615615.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+      60* |       0 |      33 |        0 |      0 |    26 |    +0.0% | -2409.506 | -9342152.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+      70* |       0 |      42 |        0 |      0 |    27 |    +0.0% | -2340.246 | -9324005.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+      80* |       0 |      49 |        0 |      0 |    30 |    +0.0% | -2257.627 | -9096169.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+      90* |       0 |      56 |        0 |      0 |    33 |    +0.0% | -2233.053 | -9059362.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+     100* |       0 |      63 |        0 |      0 |    36 |    +0.0% | -2207.512 | -9012029.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+     110* |       0 |      69 |        0 |      0 |    40 |    +0.0% | -2187.894 | -8982544.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+     120* |       0 |      77 |        0 |      0 |    42 |    +0.0% | -2177.747 | -8968127.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+     130* |       0 |      81 |        0 |      0 |    48 |    +0.0% | -2169.402 | -8950724.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+     140* |       0 |      86 |        0 |      0 |    53 |    +0.0% | -2163.460 | -8939307.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+     150* |       0 |      93 |        0 |      0 |    56 |    +0.0% | -2154.191 | -8919020.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1566\]$_DFF_PN0_/D
+     160* |       0 |     102 |        0 |      0 |    57 |    +0.0% | -2145.148 | -8904136.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[481\]$_DFF_PN0_/D
+     170* |       0 |     108 |        0 |      0 |    61 |    +0.0% | -2145.299 | -8898761.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[481\]$_DFF_PN0_/D
+     180* |       0 |     114 |        0 |      0 |    65 |    +0.0% | -2140.497 | -8897492.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1564\]$_DFF_PN0_/D
+     190* |       0 |     118 |        0 |      0 |    71 |    +0.0% | -2138.540 | -8892444.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1837\]$_DFF_PN0_/D
+     200* |       0 |     124 |        0 |      0 |    75 |    +0.0% | -2138.511 | -8892438.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[1293\]$_DFF_PN0_/D
+     210* |       0 |     130 |        0 |      0 |    79 |    +0.0% | -2139.204 | -8892433.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[211\]$_DFF_PN0_/D
+     220* |       0 |     137 |        0 |      0 |    82 |    +0.0% | -2133.109 | -8881096.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     230* |       0 |     143 |        0 |      0 |    86 |    +0.0% | -2135.137 | -8874068.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[481\]$_DFF_PN0_/D
+     240* |       0 |     151 |        0 |      0 |    88 |    +0.0% | -2131.795 | -8873941.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[481\]$_DFF_PN0_/D
+     250* |       0 |     157 |        0 |      0 |    92 |    +0.0% | -2123.461 | -8873799.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[481\]$_DFF_PN0_/D
+     256* |       0 |     161 |        0 |      0 |    94 |    +0.0% | -2120.540 | -8868534.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     260* |       0 |     163 |        0 |      0 |    95 |    +0.0% | -2120.691 | -8868532.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     270* |       0 |     168 |        0 |      0 |   100 |    +0.0% | -2120.748 | -8868499.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     279* |       0 |     173 |        0 |      0 |   104 |    +0.0% | -2120.373 | -8868467.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     280* |       0 |     173 |        0 |      0 |   104 |    +0.0% | -2120.373 | -8868467.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     282* |       0 |     174 |        0 |      0 |   105 |    +0.0% | -2120.373 | -8868465.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     285* |       0 |     174 |        0 |      0 |   106 |    +0.0% | -2120.374 | -8868464.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     288* |       0 |     175 |        0 |      0 |   107 |    +0.0% | -2120.374 | -8868461.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     290* |       0 |     175 |        0 |      0 |   108 |    +0.0% | -2120.374 | -8868460.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     291* |       0 |     176 |        0 |      0 |   108 |    +0.0% | -2120.374 | -8868459.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     294* |       0 |     177 |        0 |      0 |   109 |    +0.0% | -2120.374 | -8868456.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     297* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     299* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     300* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     301* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     303* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     305* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     307* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     309* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     310* |       0 |     178 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868454.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     320* |       0 |     185 |        0 |      0 |   113 |    +0.0% | -2120.784 | -8868424.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     330* |       0 |     191 |        0 |      0 |   117 |    +0.0% | -2120.835 | -8868398.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     335* |       0 |     180 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868443.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     340* |       0 |     184 |        0 |      0 |   110 |    +0.0% | -2120.547 | -8868424.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     350* |       0 |     192 |        0 |      0 |   112 |    +0.0% | -2120.561 | -8868387.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     351* |       0 |     180 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868443.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     360* |       0 |     188 |        0 |      0 |   110 |    +0.0% | -2120.768 | -8868421.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+     367* |       0 |     180 |        0 |      0 |   110 |    +0.0% | -2120.374 | -8868443.0 |   7459 | issue_stage_i.i_scoreboard/fwd_o\[751\]$_DFF_PN0_/D
+make[1]: *** [Makefile:469: do-2_1_floorplan] Terminated
+make: *** [Makefile:469: results/asap7/cva6/hier/2_1_floorplan.odb] Terminated
+Elapsed time: 34:03.17[h:]min:sec. CPU time: user 1041.10 sys 1425.35 (120%). Peak memory: 968312KB.

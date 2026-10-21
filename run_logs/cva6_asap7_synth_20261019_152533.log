@@ -1,0 +1,370 @@
+/home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/synth.sh /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/synth_canonicalize.tcl ./logs/asap7/cva6/base/1_1_yosys_canonicalize.log
+Using ABC speed script.
+1. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+2. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+3. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+4. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+5. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+6. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_LVT_FF_nldm_211120.lib.gz
+7. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_LVT_FF_nldm_220122.lib.gz
+8. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_LVT_FF_nldm_211120.lib.gz
+9. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_LVT_FF_nldm_211120.lib.gz
+10. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_LVT_FF_nldm_220123.lib
+11. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_SLVT_FF_nldm_211120.lib.gz
+12. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_SLVT_FF_nldm_220122.lib.gz
+13. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_SLVT_FF_nldm_211120.lib.gz
+14. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_SLVT_FF_nldm_211120.lib.gz
+15. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_SLVT_FF_nldm_220123.lib
+16. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x256.lib
+17. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_128x64.lib
+18. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x28.lib
+19. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x25.lib
+20. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+21. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+22. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+23. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+24. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+25. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_LVT_FF_nldm_211120.lib.gz
+26. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_LVT_FF_nldm_220122.lib.gz
+27. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_LVT_FF_nldm_211120.lib.gz
+28. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_LVT_FF_nldm_211120.lib.gz
+29. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_LVT_FF_nldm_220123.lib
+30. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_SLVT_FF_nldm_211120.lib.gz
+31. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_SLVT_FF_nldm_220122.lib.gz
+32. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_SLVT_FF_nldm_211120.lib.gz
+33. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_SLVT_FF_nldm_211120.lib.gz
+34. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_SLVT_FF_nldm_220123.lib
+35. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x256.lib
+36. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_128x64.lib
+37. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x28.lib
+38. Executing Liberty frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/fakeram7_64x25.lib
+39. Executing SLANG frontend.
+designs/src/cva6/core/cache_subsystem/hpdcache/rtl/src/hwpf_stride/hwpf_stride.sv:158: Warning: asynchronous load value missing for variable '\csr_throttle_q'
+39.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+39.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+39.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+39.4. Executing PROC_INIT pass (extract init attributes).
+39.5. Executing PROC_ROM pass (convert switches to ROMs).
+39.6. Executing PROC_MUX pass (convert decision trees to multiplexers).
+39.7. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+39.8. Executing OPT_EXPR pass (perform const folding).
+40. Executing HIERARCHY pass (managing design hierarchy).
+40.1. Analyzing design hierarchy..
+40.2. Analyzing design hierarchy..
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/designs/asap7/cva6/canonicalize.tcl
+41. Executing OPT_CLEAN pass (remove unused cells and wires).
+42. Executing RTLIL backend.
+Warnings: 1 unique messages, 4 total
+End of script. Logfile hash: 5e3f13b2f3, time: 79.02s, user: 71.87s, system: 7.63s, MEM: 296.94 MB peak
+Yosys 0.69+274 (git sha1 7513f8df8, GNU /usr/bin/c++ 13.3.0)
+Time spent: 31% 2x read_slang (24 sec), 21% 1x opt_clean (16 sec), ...
+Elapsed time: 1:19.65[h:]min:sec. CPU time: user 72.35 sys 7.76 (100%). Peak memory: 304068KB.
+Log                    Ext     Elapsed      CPU     CPU/ Peak Mem sha1sum
+                                     s        s  Elapsed       MB [0:10)
+1_1_yosys_canonicalize .rtlil       79       80     1.01      296 4a0d4c371e
+/home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/synth.sh /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/synth.tcl ./logs/asap7/cva6/base/1_2_yosys.log
+Using ABC speed script.
+1. Executing RTLIL frontend.
+2. Executing HIERARCHY pass (managing design hierarchy).
+2.1. Analyzing design hierarchy..
+2.2. Analyzing design hierarchy..
+3. Executing SYNTH pass.
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+3.1.1. Analyzing design hierarchy..
+3.1.2. Analyzing design hierarchy..
+3.2. Executing PROC pass (convert processes to netlists).
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+3.3. Executing CHECK pass (checking for obvious problems).
+3.4. Executing FLATTEN pass (flatten design).
+3.5. Executing OPT_EXPR pass (perform const folding).
+3.6. Executing CHECK pass (checking for obvious problems).
+3.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8. Executing OPT pass (performing simple optimizations).
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+3.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.8. Executing OPT_EXPR pass (perform const folding).
+3.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.12. Executing OPT_MERGE pass (detect identical cells).
+3.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.15. Executing OPT_EXPR pass (perform const folding).
+3.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+3.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.19. Executing OPT_MERGE pass (detect identical cells).
+3.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.22. Executing OPT_EXPR pass (perform const folding).
+3.8.23. Rerunning OPT passes. (Maybe there is more to do..)
+3.8.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.26. Executing OPT_MERGE pass (detect identical cells).
+3.8.27. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.29. Executing OPT_EXPR pass (perform const folding).
+3.8.30. Rerunning OPT passes. (Maybe there is more to do..)
+3.8.31. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.32. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.33. Executing OPT_MERGE pass (detect identical cells).
+3.8.34. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.35. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.36. Executing OPT_EXPR pass (perform const folding).
+3.8.37. Finished fast OPT passes. (There is nothing left to do.)
+3.9. Executing FSM pass (extract and optimize FSM).
+3.9.1. Executing FSM_DETECT pass (finding FSMs in design).
+3.9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+3.9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+3.9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+3.9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+3.10. Executing OPT pass (performing simple optimizations).
+3.10.1. Executing OPT_EXPR pass (perform const folding).
+3.10.2. Executing OPT_MERGE pass (detect identical cells).
+3.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.10.5. Executing OPT_MERGE pass (detect identical cells).
+3.10.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.10.8. Executing OPT_EXPR pass (perform const folding).
+3.10.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.10.12. Executing OPT_MERGE pass (detect identical cells).
+3.10.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.10.15. Executing OPT_EXPR pass (perform const folding).
+3.10.16. Rerunning OPT passes. (Maybe there is more to do..)
+3.10.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.10.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.10.19. Executing OPT_MERGE pass (detect identical cells).
+3.10.20. Executing OPT_DFF pass (perform DFF optimizations).
+3.10.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.10.22. Executing OPT_EXPR pass (perform const folding).
+3.10.23. Finished fast OPT passes. (There is nothing left to do.)
+3.11. Executing WREDUCE pass (reducing word size of cells).
+3.12. Executing PEEPOPT pass (run peephole optimizers).
+3.13. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.14. Executing ALUMACC pass (create $alu and $macc cells).
+3.15. Executing SHARE pass (SAT-based resource sharing).
+3.16. Executing OPT pass (performing simple optimizations).
+3.16.1. Executing OPT_EXPR pass (perform const folding).
+3.16.2. Executing OPT_MERGE pass (detect identical cells).
+3.16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.16.5. Executing OPT_MERGE pass (detect identical cells).
+3.16.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.8. Executing OPT_EXPR pass (perform const folding).
+3.16.9. Rerunning OPT passes. (Maybe there is more to do..)
+3.16.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.16.12. Executing OPT_MERGE pass (detect identical cells).
+3.16.13. Executing OPT_DFF pass (perform DFF optimizations).
+3.16.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.15. Executing OPT_EXPR pass (perform const folding).
+3.16.16. Finished fast OPT passes. (There is nothing left to do.)
+3.17. Executing MEMORY pass.
+3.17.1. Executing OPT_MEM pass (optimize memories).
+3.17.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+3.17.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+3.17.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+3.17.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+3.17.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.17.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+3.17.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+3.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.17.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+3.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+4. Executing TRIBUF pass.
+5. Executing OPT_CLEAN pass (remove unused cells and wires).
+source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/synth_wrap_operators.tcl
+6. Executing TECHMAP pass (map to technology primitives).
+6.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+6.2. Continuing TECHMAP pass.
+6.73. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+6.74. Executing OPT_EXPR pass (perform const folding).
+6.115. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+6.116. Executing OPT_EXPR pass (perform const folding).
+7. Generating architectural options for $alu
+7.1. Executing WRAPCELL pass. (wrap selected cells)
+7.2. Executing TECHMAP pass (map to technology primitives).
+7.2.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+7.2.2. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/choices/han-carlson.v
+7.2.3. Continuing TECHMAP pass.
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.\j [4:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$655608': $auto$proc_dlatch.cc:557:proc_dlatch$658323
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.\j [31:5]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$655608': $auto$proc_dlatch.cc:559:proc_dlatch$658326
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.\j [3:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$659333': $auto$proc_dlatch.cc:557:proc_dlatch$660560
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.\j [31:4]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$659333': $auto$proc_dlatch.cc:559:proc_dlatch$660563
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100010.\j [4:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100010.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$661047': $auto$proc_dlatch.cc:557:proc_dlatch$662367
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100010.\j [31:5]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100010.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$661047': $auto$proc_dlatch.cc:559:proc_dlatch$662370
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001110.\j [2:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001110.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$665277': $auto$proc_dlatch.cc:557:proc_dlatch$665757
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001110.\j [31:3]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001110.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$665277': $auto$proc_dlatch.cc:559:proc_dlatch$665760
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100001.\j [4:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100001.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$666478': $auto$proc_dlatch.cc:557:proc_dlatch$667738
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100001.\j [31:5]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100001.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$666478': $auto$proc_dlatch.cc:559:proc_dlatch$667741
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.\j [2:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$670145': $auto$proc_dlatch.cc:557:proc_dlatch$670700
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.\j [31:3]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$670145': $auto$proc_dlatch.cc:559:proc_dlatch$670703
+7.3. Executing TECHMAP pass (map to technology primitives).
+7.3.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+7.3.2. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/choices/kogge-stone.v
+7.3.3. Continuing TECHMAP pass.
+7.4. Executing TECHMAP pass (map to technology primitives).
+7.4.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+7.4.2. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/choices/sklansky.v
+7.4.3. Continuing TECHMAP pass.
+7.5. Executing TECHMAP pass (map to technology primitives).
+7.5.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+7.5.2. Continuing TECHMAP pass.
+8. Generating architectural options for $macc
+8.1. Executing WRAPCELL pass. (wrap selected cells)
+8.2. Executing TECHMAP pass (map to technology primitives).
+8.2.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+8.2.2. Executing Verilog-2005 frontend: /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/synth_wrap_operators-booth.v
+8.2.3. Continuing TECHMAP pass.
+8.3. Executing TECHMAP pass (map to technology primitives).
+8.3.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+8.3.2. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/choices/han-carlson.v
+8.3.3. Continuing TECHMAP pass.
+9. Executing OPT pass (performing simple optimizations).
+9.1. Executing OPT_EXPR pass (perform const folding).
+9.2. Executing OPT_MERGE pass (detect identical cells).
+9.3. Executing OPT_DFF pass (perform DFF optimizations).
+9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+9.5. Rerunning OPT passes. (Removed registers in this run.)
+9.6. Executing OPT_EXPR pass (perform const folding).
+9.7. Executing OPT_MERGE pass (detect identical cells).
+9.8. Executing OPT_DFF pass (perform DFF optimizations).
+9.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+9.10. Rerunning OPT passes. (Removed registers in this run.)
+9.11. Executing OPT_EXPR pass (perform const folding).
+9.12. Executing OPT_MERGE pass (detect identical cells).
+9.13. Executing OPT_DFF pass (perform DFF optimizations).
+9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+9.15. Rerunning OPT passes. (Removed registers in this run.)
+9.16. Executing OPT_EXPR pass (perform const folding).
+9.17. Executing OPT_MERGE pass (detect identical cells).
+9.18. Executing OPT_DFF pass (perform DFF optimizations).
+9.19. Executing OPT_CLEAN pass (remove unused cells and wires).
+9.20. Rerunning OPT passes. (Removed registers in this run.)
+9.21. Executing OPT_EXPR pass (perform const folding).
+9.22. Executing OPT_MERGE pass (detect identical cells).
+9.23. Executing OPT_DFF pass (perform DFF optimizations).
+9.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+9.25. Finished fast OPT passes.
+10. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+11. Executing OPT pass (performing simple optimizations).
+11.1. Executing OPT_EXPR pass (perform const folding).
+11.2. Executing OPT_MERGE pass (detect identical cells).
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+11.5. Executing OPT_MERGE pass (detect identical cells).
+11.6. Executing OPT_SHARE pass.
+11.7. Executing OPT_DFF pass (perform DFF optimizations).
+11.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+11.9. Executing OPT_EXPR pass (perform const folding).
+11.10. Rerunning OPT passes. (Maybe there is more to do..)
+11.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+11.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+11.13. Executing OPT_MERGE pass (detect identical cells).
+11.14. Executing OPT_SHARE pass.
+11.15. Executing OPT_DFF pass (perform DFF optimizations).
+11.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+11.17. Executing OPT_EXPR pass (perform const folding).
+11.18. Rerunning OPT passes. (Maybe there is more to do..)
+11.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+11.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+11.21. Executing OPT_MERGE pass (detect identical cells).
+11.22. Executing OPT_SHARE pass.
+11.23. Executing OPT_DFF pass (perform DFF optimizations).
+11.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+11.25. Executing OPT_EXPR pass (perform const folding).
+11.26. Finished fast OPT passes. (There is nothing left to do.)
+12. Executing TECHMAP pass (map to technology primitives).
+12.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+12.2. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/choices/han-carlson.v
+12.3. Continuing TECHMAP pass.
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000001.\j' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000001.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$745576': $auto$proc_dlatch.cc:557:proc_dlatch$745614
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000110.\j [1:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000110.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$745642': $auto$proc_dlatch.cc:557:proc_dlatch$745831
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000110.\j [31:2]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000110.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$745642': $auto$proc_dlatch.cc:559:proc_dlatch$745834
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000010.\j' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000010.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$745852': $auto$proc_dlatch.cc:557:proc_dlatch$745905
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000011.\j [0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000011.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$745932': $auto$proc_dlatch.cc:557:proc_dlatch$746031
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000011.\j [31:1]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000011.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$745932': $auto$proc_dlatch.cc:559:proc_dlatch$746034
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000100.\j [0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000100.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$746057': $auto$proc_dlatch.cc:557:proc_dlatch$746180
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000100.\j [31:1]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000100.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$746057': $auto$proc_dlatch.cc:559:proc_dlatch$746183
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000111.\j [1:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000111.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$746358': $auto$proc_dlatch.cc:557:proc_dlatch$746580
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000111.\j [31:2]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000111.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$746358': $auto$proc_dlatch.cc:559:proc_dlatch$746583
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011101.\j [3:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011101.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$746671': $auto$proc_dlatch.cc:557:proc_dlatch$747763
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011101.\j [31:4]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011101.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$746671': $auto$proc_dlatch.cc:559:proc_dlatch$747766
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.\j [3:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$747867': $auto$proc_dlatch.cc:557:proc_dlatch$749094
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.\j [31:4]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000100000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$747867': $auto$proc_dlatch.cc:559:proc_dlatch$749097
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011111.\j [3:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011111.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$749221': $auto$proc_dlatch.cc:557:proc_dlatch$750397
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011111.\j [31:4]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011111.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$749221': $auto$proc_dlatch.cc:559:proc_dlatch$750400
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011110.\j [3:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011110.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$750699': $auto$proc_dlatch.cc:557:proc_dlatch$751842
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011110.\j [31:4]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011110.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$750699': $auto$proc_dlatch.cc:559:proc_dlatch$751845
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.\j [2:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$752006': $auto$proc_dlatch.cc:557:proc_dlatch$752561
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.\j [31:3]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000010000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$752006': $auto$proc_dlatch.cc:559:proc_dlatch$752564
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.\j [4:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$753807': $auto$proc_dlatch.cc:557:proc_dlatch$756522
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.\j [31:5]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000001000000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$753807': $auto$proc_dlatch.cc:559:proc_dlatch$756525
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011010.\j [3:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011010.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$757035': $auto$proc_dlatch.cc:557:proc_dlatch$758010
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011010.\j [31:4]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000011010.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$757035': $auto$proc_dlatch.cc:559:proc_dlatch$758013
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001101.\j [2:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001101.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$758073': $auto$proc_dlatch.cc:557:proc_dlatch$758511
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001101.\j [31:3]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001101.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$758073': $auto$proc_dlatch.cc:559:proc_dlatch$758514
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001000.\j [1:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$758551': $auto$proc_dlatch.cc:557:proc_dlatch$758806
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001000.\j [31:2]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000001000.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$758551': $auto$proc_dlatch.cc:559:proc_dlatch$758809
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000101.\j [1:0]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000101.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$759117': $auto$proc_dlatch.cc:557:proc_dlatch$759273
+Warning: Latch inferred for signal `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000101.\j [31:2]' from process `$paramod\_80_lcu_han_carlson\WIDTH=32'00000000000000000000000000000101.$proc$/usr/local/bin/../share/yosys/choices/han-carlson.v:18$759117': $auto$proc_dlatch.cc:559:proc_dlatch$759276
+Took 926 seconds: source /home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/synth_wrap_operators.tcl
+13. Executing OPT pass (performing simple optimizations).
+13.1. Executing OPT_EXPR pass (perform const folding).
+13.2. Executing OPT_MERGE pass (detect identical cells).
+13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+13.5. Executing OPT_MERGE pass (detect identical cells).
+13.6. Executing OPT_DFF pass (perform DFF optimizations).
+13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+13.8. Executing OPT_EXPR pass (perform const folding).
+13.9. Rerunning OPT passes. (Maybe there is more to do..)
+13.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+13.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+13.12. Executing OPT_MERGE pass (detect identical cells).
+13.13. Executing OPT_DFF pass (perform DFF optimizations).
+13.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+13.15. Executing OPT_EXPR pass (perform const folding).
+13.16. Rerunning OPT passes. (Maybe there is more to do..)
+13.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+13.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+13.19. Executing OPT_MERGE pass (detect identical cells).
+13.20. Executing OPT_DFF pass (perform DFF optimizations).
+13.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+13.22. Executing OPT_EXPR pass (perform const folding).
+13.23. Rerunning OPT passes. (Maybe there is more to do..)
+13.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+13.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+13.26. Executing OPT_MERGE pass (detect identical cells).
+13.27. Executing OPT_DFF pass (perform DFF optimizations).
+13.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+13.29. Executing OPT_EXPR pass (perform const folding).
+13.30. Finished fast OPT passes. (There is nothing left to do.)
+14. Executing EXTRACT_FA pass (find and extract full/half adders).
+make[1]: *** [Makefile:297: do-yosys] Terminated
+make: *** [Makefile:311: results/asap7/cva6/base/1_2_yosys.v] Terminated
+Elapsed time: 48:26.18[h:]min:sec. CPU time: user 3007.04 sys 175.61 (109%). Peak memory: 1259832KB.

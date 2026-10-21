@@ -1,0 +1,4 @@
+/home/rafay/Desktop/projects/exodus/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_2_route detail_route
+Running detail_route.tcl, stage 5_2_route
+make[1]: *** [Makefile:616: do-5_2_route] Error 127
+make: *** [Makefile:616: results/asap7/cva6/hier/5_2_route.odb] Error 2
