@@ -1,39 +1,164 @@
 # CVA6 RTL-to-GDS on OpenROAD-flow-scripts (asap7)
 
 Everything needed to run the CVA6 core through the ORFS flow on the asap7 platform, from a fresh clone.
-The flow is vendored in `orfs/`, a trimmed copy of OpenROAD-flow-scripts: `Makefile`, `scripts/`, `util/`,
-`platforms/asap7` and `platforms/common`, plus the CVA6 design and sources. The OpenROAD and Yosys
-binaries are not included; install them separately (see Requirements).
+The flow is vendored in `orfs/`, a trimmed copy of [OpenROAD-flow-scripts](https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts):
+`Makefile`, `scripts/`, `util/`, `platforms/asap7` and `platforms/common`, plus the CVA6 design and sources.
+The OpenROAD and Yosys binaries are not included; Step 1 covers installing them.
 
-## Quick start
+Contents: [Requirements](#requirements) · [Step by step](#step-by-step) · [What is configured](#what-is-configured) ·
+[Status](#status) · [Troubleshooting](#troubleshooting) · [Other files](#other-files) · [Licenses](#licenses)
+
+## Requirements
+
+These are the versions the flow was run with. Other versions may work but were not tried.
+
+| Tool | Version used | Where to get it |
+| --- | --- | --- |
+| OpenROAD | `26Q4-271-g0907a8656e` | [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD), or built by ORFS (Step 1) |
+| Yosys | `0.69+274` (git `7513f8df8`), with the built-in `read_slang` frontend | [Yosys](https://github.com/YosysHQ/yosys), or built by ORFS (Step 1). The slang frontend comes from [yosys-slang](https://github.com/povik/yosys-slang) |
+| KLayout | `0.28.16`, only for the final GDS step | [klayout.de/build.html](https://www.klayout.de/build.html), or `apt` on Ubuntu |
+| GNU Make, Python 3, Git | any recent | your package manager |
+| Memory | 16 GB or more recommended | detailed routing peaks at about 7 GB |
+
+Docs: [ORFS documentation](https://openroad-flow-scripts.readthedocs.io/en/latest/) ·
+[CVA6 core](https://github.com/openhwgroup/cva6) · [asap7 PDK](https://github.com/The-OpenROAD-Project/asap7_pdk_r1p7).
+
+## Step by step
+
+### Step 1: install the tools
+
+Skip this step if `openroad -version`, `yosys -V` and `klayout -v` already work.
+
+Option A, build OpenROAD and Yosys with ORFS. These commands come from the ORFS scripts' options and were not
+run as part of this repo; the first build takes a long time. See the
+[ORFS build guide](https://openroad-flow-scripts.readthedocs.io/en/latest/user/BuildLocally.html) if a step fails.
+
+```bash
+git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts
+cd OpenROAD-flow-scripts
+sudo ./setup.sh                 # installs system dependencies (Linux needs sudo)
+./build_openroad.sh --local     # builds OpenROAD and Yosys into tools/install/
+export PATH="$PWD/tools/install/OpenROAD/bin:$PWD/tools/install/yosys/bin:$PATH"
+```
+
+Option B, use tools you already have, as long as they are on your `PATH`.
+
+Install KLayout. On Ubuntu 24.04 (this installed 0.28.16):
+
+```bash
+sudo apt install -y klayout
+```
+
+On other systems use the [KLayout download page](https://www.klayout.de/build.html).
+
+Check the tools:
+
+```bash
+openroad -version
+yosys -V
+klayout -v
+yosys -p "help read_slang" | head -5   # must print the read_slang help, not "No such command"
+```
+
+### Step 2: clone this repo
 
 ```bash
 git clone git@github.com:Pr0Chef/openpd_work.git
 cd openpd_work
-./run_cva6_asap7.sh -H -c              # hierarchical synthesis, clean start
-./run_cva6_asap7.sh -H -s route -j 4   # continue through detailed routing
-./run_cva6_asap7.sh -H -s final -j 4   # finish stage, writes 6_final.gds
 ```
 
-Options: `-H` hierarchical synthesis (uses `designs/asap7/cva6/config_hier.mk`), `-s STAGE` last stage to run
-(`synth`, `floorplan`, `place`, `cts`, `route`, `final`), `-c` clean the previous results first, `-j N` threads.
-Make reuses finished stages, so rerunning with a later `-s` resumes where the last run stopped.
-A timestamped log of each run goes to `run_logs/`. Flow output goes to `orfs/flow/{results,logs,reports}/asap7/cva6/hier/`.
+The clone is about 430 MB. Use `https://github.com/Pr0Chef/openpd_work.git` if you do not have SSH access to GitHub.
 
-## Requirements
+### Step 3: check your machine
 
-These are the versions the flow was run with:
+```bash
+nproc          # number of cores
+free -g        # total and free memory
+```
 
-- OpenROAD `26Q4-271-g0907a8656e`, on the `PATH` (`openroad -version`)
-- Yosys `0.69+274` (git `7513f8df8`) with the `read_slang` frontend built in
-- KLayout `0.28.16`, needed only for the final GDS step
-- GNU Make and Python 3
+Detailed routing needs about 7 GB on top of what your desktop uses. On a 10.8 GB VM with a desktop session it was
+killed twice by `systemd-oomd` (see [Troubleshooting](#troubleshooting)). Close heavy applications first, or run
+without a desktop session.
 
-The script sets `OPENROAD_EXE` and `YOSYS_EXE` from your `PATH`. Without them ORFS looks under
-`tools/install/`, which does not exist in this repo. Set `ORFS_FLOW` to use a different ORFS checkout.
+### Step 4: run synthesis
 
-Memory: detailed routing peaks at about 7 GB. On a 10.8 GB VM with a desktop session it was killed twice by
-`systemd-oomd`. Use 16 GB or more, or run without a desktop session.
+```bash
+./run_cva6_asap7.sh -H -c
+```
+
+`-H` selects hierarchical synthesis and `-c` cleans earlier results. Measured on this design: canonicalize takes
+about 95 seconds and the main synthesis about 2 hours (1 h 58 min). Watch progress from a second terminal:
+
+```bash
+tail -f orfs/flow/logs/asap7/cva6/hier/1_2_yosys.log
+```
+
+Outputs in `orfs/flow/results/asap7/cva6/hier/`: `1_2_yosys.v` (netlist) and `1_synth.odb`. The synthesis stats are in
+`orfs/flow/reports/asap7/cva6/hier/synth_stat.txt`.
+
+### Step 5: floorplan, placement, clock tree and routing
+
+Each command reuses the stages already finished, so you can run them one at a time or jump straight to the last one.
+
+```bash
+./run_cva6_asap7.sh -H -s floorplan -j 4   # 2_floorplan.odb
+./run_cva6_asap7.sh -H -s place -j 4       # 3_place.odb
+./run_cva6_asap7.sh -H -s cts -j 4         # 4_cts.odb
+./run_cva6_asap7.sh -H -s route -j 4       # 5_1_grt.odb, then 5_route.odb
+```
+
+`-j 4` limits OpenROAD to 4 threads, which lowers peak memory. Measured here: global routing took about 24 minutes.
+The other stages were not timed. To go straight to the end, run only the `route` command: it runs the earlier stages first.
+
+### Step 6: finish and write the GDS
+
+```bash
+./run_cva6_asap7.sh -H -s final -j 4
+```
+
+This writes the final reports and, through KLayout, `orfs/flow/results/asap7/cva6/hier/6_final.gds`. This step has not
+been run to completion yet (see [Status](#status)). The platform has no GDS for the `fakeram7_*` SRAM macros, so
+the macros are expected to come out as empty cells (`GDS_ALLOW_EMPTY ?= fakeram.*` in `platforms/asap7/config.mk`).
+
+### Step 7: look at the results
+
+Open the layout of a finished stage in the OpenROAD GUI (`gui_route` and `gui_final` work once those stages have been built). The script sets `OPENROAD_EXE` and `YOSYS_EXE` itself; for
+a direct `make` call you set them first:
+
+```bash
+export OPENROAD_EXE=$(command -v openroad) YOSYS_EXE=$(command -v yosys)
+cd orfs/flow
+make DESIGN_CONFIG=designs/asap7/cva6/config_hier.mk gui_place   # or gui_floorplan, gui_cts
+```
+
+To render a layout picture without a display (used for the PDF), run from the repo root:
+
+```bash
+QT_QPA_PLATFORM=offscreen openroad -gui -no_splash -exit report_assets/snap_place.tcl
+```
+
+Quality-of-results numbers are in JSON per stage (instance count, area, utilization, slack, power):
+
+```bash
+cat orfs/flow/logs/asap7/cva6/hier/3_5_place_dp.json | python3 -m json.tool | grep -E "instance__count|timing__setup__ws|power__total"
+```
+
+Reports are in `orfs/flow/reports/asap7/cva6/hier/` (for example `3_detailed_place.rpt`).
+
+### Running unattended
+
+The script prints to the terminal and writes a timestamped log to `run_logs/`. For a long run that should survive
+closing the terminal, start it as its own systemd user unit (Linux with systemd):
+
+```bash
+systemd-run --user --unit=cva6-route --collect --setenv=PATH="$PATH" \
+  --working-directory="$PWD" ./run_cva6_asap7.sh -H -s final -j 4
+systemctl --user status cva6-route     # is it running
+journalctl --user -u cva6-route -f     # follow its output
+```
+
+This keeps it out of your desktop app's process group. It does not protect against the whole desktop session
+being torn down under memory pressure.
 
 ## What is configured
 
@@ -43,6 +168,8 @@ Memory: detailed routing peaks at about 7 GB. On a 10.8 GB VM with a desktop ses
 - `orfs/flow/designs/asap7/cva6/constraint_hier.sdc`: copy of the stock SDC with `clk_period` 5000 instead of 910.
   At 910 the floorplan timing repair started at a worst slack of -3,330 ps and made little progress. Placement
   slack at 5000 is about +3,300 ps, so a period near 2 ns looks reachable but is untested.
+- `run_cva6_asap7.sh`: options `-H` hierarchical, `-s STAGE` last stage (`synth`, `floorplan`, `place`, `cts`,
+  `route`, `final`), `-c` clean first, `-j N` threads. Set `ORFS_FLOW` to use a different ORFS checkout.
 
 ## Status
 
@@ -51,13 +178,21 @@ Measured on the hierarchical flow: synthesis took 1 h 58 min (115,493 instances 
 violations; global routing reports 132 max-slew violations that have not been examined. Detailed routing was
 interrupted by memory pressure and has not finished, so no `6_final.gds` exists yet.
 
-The `fakeram7_*` macros have no GDS in the platform. `platforms/asap7/config.mk` sets `GDS_ALLOW_EMPTY ?= fakeram.*`,
-so the finish stage should write them as empty cells. That has not been run to confirm.
+## Troubleshooting
+
+- **`make` fails at once with error 127 and a path under `tools/install/`.** ORFS cannot find OpenROAD. Use the
+  wrapper script, or export `OPENROAD_EXE` and `YOSYS_EXE` as in Step 7.
+- **A stage stops with no error, mid-routing.** Look for memory pressure:
+  `journalctl --since "1 hour ago" | grep -iE "oomd|oom-kill"`. Free memory, add RAM, or run without a desktop session.
+- **`read_slang` is not found.** Your Yosys lacks the slang frontend. Build Yosys through ORFS (Step 1, Option A).
+- **Timing repair runs for hours during floorplan.** The clock is too tight for the netlist. Use `config_hier.mk`
+  (5000 ps) rather than the stock `config.mk`.
+- **Rerun from scratch.** Add `-c`, for example `./run_cva6_asap7.sh -H -c -s place`.
 
 ## Other files
 
 - `CVA6_asap7_synthesis_log.pdf`: write-up of the work, the results and the problems hit.
-- `report_assets/`: placement layout image and the script that renders it (`openroad -gui` offscreen).
+- `report_assets/`: placement layout image and the script that renders it.
 - `orfs_overlay/designs/sky130hd/cva6/`: an unfinished sky130hd attempt (slang frontend, flop-based RAM
   stand-ins). It needs the sky130hd platform from a full ORFS checkout and never completed.
 
@@ -65,4 +200,4 @@ so the finish stage should write them as empty cells. That has not been run to c
 
 `orfs/` contains files from OpenROAD-flow-scripts (see `orfs/LICENSE_BUILD_RUN_SCRIPTS`) and the CVA6 sources with
 their vendored dependencies. The CVA6 sources are copied without their upstream license files, so check the
-CVA6 repository's license before reusing them.
+[CVA6 repository's](https://github.com/openhwgroup/cva6) license before reusing them.
