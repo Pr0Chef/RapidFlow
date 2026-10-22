@@ -7,13 +7,16 @@
 #   -c        clean previous asap7/cva6 results, logs and reports first
 #   -j JOBS   parallel jobs for the flow (default: nproc)
 #
-# Design config: flow/designs/asap7/cva6/config.mk (slang frontend, fakeram7 macros as blackboxes).
-# Output: flow/{logs,results,reports}/asap7/cva6/base, plus a timestamped log in ./run_logs/.
+# Design config: designs/asap7/cva6/config.mk (slang frontend, fakeram7 macros as blackboxes).
+# Output: <flow>/{logs,results,reports}/asap7/cva6/<base|hier>, plus a timestamped log in ./run_logs/.
 
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-FLOW="$ROOT/OpenROAD-flow-scripts/flow"
+# Flow directory: $ORFS_FLOW if set, else the vendored ./orfs/flow, else an ORFS clone next to this script.
+if [ -n "${ORFS_FLOW:-}" ]; then FLOW="$ORFS_FLOW"
+elif [ -d "$ROOT/orfs/flow" ]; then FLOW="$ROOT/orfs/flow"
+else FLOW="$ROOT/OpenROAD-flow-scripts/flow"; fi
 CONFIG="designs/asap7/cva6/config.mk"
 STAGE=synth
 CLEAN=0

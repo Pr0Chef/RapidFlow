@@ -3,3 +3,8 @@
 /OpenROAD-flow-scripts/
 /yosys/
 *.zip
+# generated flow output
+/orfs/flow/results/
+/orfs/flow/logs/
+/orfs/flow/objects/
+/orfs/flow/reports/
