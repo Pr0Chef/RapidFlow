@@ -5,7 +5,7 @@ The flow is vendored in `orfs/`, a trimmed copy of [OpenROAD-flow-scripts](https
 `Makefile`, `scripts/`, `util/`, `platforms/asap7` and `platforms/common`, plus the CVA6 design and sources.
 The OpenROAD and Yosys binaries are not included; Step 1 covers installing them.
 
-Contents: [Requirements](#requirements) · [Step by step](#step-by-step) · [What is configured](#what-is-configured) ·
+Contents: [Requirements](#requirements) · [The CVA6 RTL](#the-cva6-rtl) · [Step by step](#step-by-step) · [What is configured](#what-is-configured) ·
 [Status](#status) · [Troubleshooting](#troubleshooting) · [Other files](#other-files) · [Licenses](#licenses)
 
 ## Requirements
@@ -22,6 +22,36 @@ These are the versions the flow was run with. Other versions may work but were n
 
 Docs: [ORFS documentation](https://openroad-flow-scripts.readthedocs.io/en/latest/) ·
 [CVA6 core](https://github.com/openhwgroup/cva6) · [asap7 PDK](https://github.com/The-OpenROAD-Project/asap7_pdk_r1p7).
+
+## The CVA6 RTL
+
+The RTL is in this repo, in `orfs/flow/designs/src/cva6/` (175 files, 169 of them SystemVerilog). It is ORFS's copy of
+[CVA6](https://github.com/openhwgroup/cva6), taken from upstream commit `3a389af` "with some changes for the RAMs"
+(from the `README.md` in that folder). No separate download is needed.
+
+| Folder | Contents |
+| --- | --- |
+| `core/` | The pipeline: `cva6.sv` (top module `cva6`), `ex_stage.sv`, `issue_stage.sv`, `csr_regfile.sv`, `decoder.sv`, `multiplier.sv`, and others |
+| `core/frontend/` | Fetch, branch prediction and instruction queue |
+| `core/cache_subsystem/` | Instruction and data caches, including the `hpdcache` data cache |
+| `core/cvfpu/` | Floating-point unit sources |
+| `core/cva6_mmu/`, `core/pmp/` | Address translation and physical memory protection |
+| `core/cvxif_example/` | Example of the CORE-V eXtension interface |
+| `core/include/` | Packages and the configuration (`cv32a65x_config_pkg.sv`) |
+| `vendor/pulp-platform/` | `axi`, `common_cells` and `tech_cells_generic` dependencies |
+| `common/local/util/` | Local utilities, such as `sram_cache.sv` |
+
+The design is built with the `cv32a65x` configuration (`core/include/cv32a65x_config_pkg.sv`): 32-bit (`XLEN` 32),
+one commit port, 8 scoreboard entries, no floating-point extensions (`RVF` and `RVD` off), no MMU, 8 PMP entries,
+the CORE-V extension interface enabled, a 2 KiB instruction cache and the write-through `hpdcache` data cache.
+The clock port is `clk_i`.
+
+The "changes for the RAMs" are in `hpdcache_sram.sv`, `hpdcache_sram_wbyteenable.sv` and `sram_cache.sv`. They
+instantiate the `fakeram7_*` macros directly instead of generic SRAM models, which is why the asap7 platform's
+macro LEF and liberty files are needed.
+
+The file list the flow synthesizes is `VERILOG_FILES` in `orfs/flow/designs/asap7/cva6/config.mk`. The top module
+is set by `DESIGN_NAME = cva6` in the same file.
 
 ## Step by step
 
