@@ -5,7 +5,7 @@ The flow is vendored in `orfs/`, a trimmed copy of [OpenROAD-flow-scripts](https
 `Makefile`, `scripts/`, `util/`, `platforms/asap7` and `platforms/common`, plus the CVA6 design and sources.
 The OpenROAD and Yosys binaries are not included; Step 1 covers installing them.
 
-Contents: [Requirements](#requirements) · [The CVA6 RTL](#the-cva6-rtl) · [Step by step](#step-by-step) · [What is configured](#what-is-configured) ·
+Contents: [Requirements](#requirements) · [The CVA6 RTL](#the-cva6-rtl) · [Step by step](#step-by-step) · [GUI](#gui) · [What is configured](#what-is-configured) ·
 [Status](#status) · [Troubleshooting](#troubleshooting) · [Other files](#other-files) · [Licenses](#licenses)
 
 ## Requirements
@@ -189,6 +189,72 @@ journalctl --user -u cva6-route -f     # follow its output
 
 This keeps it out of your desktop app's process group. It does not protect against the whole desktop session
 being torn down under memory pressure.
+
+## GUI
+
+### Desktop app: ORFS Flow Runner
+
+`gui/orfs_app.py` is a desktop application (GTK 3) that can run any design in the ORFS flow directory, not
+only CVA6. It needs `python3-gi` and `gir1.2-gtk-3.0`, which Ubuntu desktops already have.
+Step-by-step instructions are in [gui/README.md](gui/README.md).
+
+```bash
+python3 gui/orfs_app.py                              # last used flow, else ./OpenROAD-flow-scripts/flow, else ./orfs/flow
+python3 gui/orfs_app.py --flow /path/to/OpenROAD-flow-scripts/flow
+gui/install_launcher.sh                              # optional: add it to the app menu and the Desktop
+```
+
+The left panel has drop-down menus for everything a run needs:
+
+| Menu | Choices |
+| --- | --- |
+| Platform | every folder in `flow/designs/`; platforms whose PDK is not in `flow/platforms/` are greyed out |
+| Design, Config | the designs of that platform and their `config*.mk` files (for example `config_hier.mk`) |
+| CPU cores | 1 to the number of cores, passed as `NUM_CORES` |
+| From stage | "Continue" (reuse finished stages), or re-run from synth, floorplan, place, cts, route or finish |
+| To stage | synth, floorplan, place, cts, route or finish |
+
+The plan box shows the exact `make` commands and what they will delete before you press Run. Re-running from a
+stage runs `make clean_<stage>` for that stage and every later one, then `make <to-stage>`; you are asked to
+confirm first. The stage list shows each stage as done, running, interrupted or not built, with its runtime and
+peak memory. Every run is logged to `run_logs/`.
+
+The tabs on the right:
+
+- **Run output**: the live output of the run, errors in red and warnings in amber.
+- **Reports**: *QoR checks* (setup and hold slack, slew, cap and fanout violations, DRC, antenna, flow errors,
+  final GDS, then all metrics by stage) and *Report files* (the design's `reports/` folder, with a line filter).
+- **Logs**: stage logs and run logs, with a filter, an errors-and-warnings-only view, and follow mode for a log
+  that is being written.
+- **Debug**: tool versions and paths (including whether Yosys has `read_slang`), CPU and memory, the resolved make
+  variables for the selected config, a count of every `[ERROR]`/`[WARNING]` message ID in the logs
+  (double-click one to see it in Logs), a `make -n` dry run, and buttons to open a stage in the OpenROAD GUI,
+  open the results folder, or copy the command.
+
+### Web console (CVA6 only)
+
+`gui/flow_gui.py` is a local web interface for the same flow. It needs only Python 3 (standard library):
+
+```bash
+python3 gui/flow_gui.py                      # uses $ORFS_FLOW, else orfs/flow
+python3 gui/flow_gui.py --flow /path/to/OpenROAD-flow-scripts/flow --port 8765
+```
+
+Then open <http://127.0.0.1:8765/>. It has four tabs:
+
+- **Run**: pick the variant, last stage, threads and clean, then Run or Stop. It calls `run_cva6_asap7.sh`, so
+  finished stages are reused and the log still goes to `run_logs/`. Stage cards show done, running, interrupted or
+  pending, with each step's runtime and peak memory read from the step logs. A run started outside the GUI (for
+  example with `systemd-run`) is detected and reported.
+- **Checks**: setup and hold slack, DRV (slew, cap, fanout), DRC, antenna and flow-error counts, read from each stage's
+  metrics JSON, with failures in red. It also shows the Yosys check count, the detailed-route DRC report and whether
+  the final GDS exists.
+- **Reports & logs**: browse `reports/`, the stage logs and `run_logs/`, with a line filter and an errors-only view.
+- **Layout**: render any finished `.odb` to PNG with OpenROAD offscreen (cached in `gui/.cache/`), or open it in the
+  OpenROAD GUI (`make gui_<stage>`, needs a display).
+
+One job runs at a time: a flow run or a render. The server listens on localhost only and can start and stop
+runs, so do not bind it to a public address with `--host`.
 
 ## What is configured
 

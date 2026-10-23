@@ -8,3 +8,6 @@
 /orfs/flow/logs/
 /orfs/flow/objects/
 /orfs/flow/reports/
+# GUI layout renders
+/gui/.cache/
+__pycache__/
