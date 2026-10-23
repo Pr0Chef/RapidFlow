@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CVA6 Flow Console</title>
+<style>
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --line: #dfe3e8; --text: #1c2430; --muted: #66707d;
+  --accent: #2f6fdf; --pass: #1f8a4c; --pass-bg: #e3f4ea; --fail: #c4352b; --fail-bg: #fbe6e4;
+  --warn: #a86a00; --warn-bg: #fbf0d9; --run: #2f6fdf; --run-bg: #e4ecfb; --code: #f0f2f5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161c; --panel: #1a2029; --line: #2c3440; --text: #e3e7ed; --muted: #9099a6;
+    --accent: #6c9cf0; --pass: #5cc98a; --pass-bg: #18311f; --fail: #f07b70; --fail-bg: #3a1c1a;
+    --warn: #e0b050; --warn-bg: #352a12; --run: #6c9cf0; --run-bg: #1a2a45; --code: #0f1318;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161c; --panel: #1a2029; --line: #2c3440; --text: #e3e7ed; --muted: #9099a6;
+  --accent: #6c9cf0; --pass: #5cc98a; --pass-bg: #18311f; --fail: #f07b70; --fail-bg: #3a1c1a;
+  --warn: #e0b050; --warn-bg: #352a12; --run: #6c9cf0; --run-bg: #1a2a45; --code: #0f1318;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 16px;
+  background: var(--panel); border-bottom: 1px solid var(--line); }
+header h1 { font-size: 16px; margin: 0; }
+header .flow { color: var(--muted); font-size: 12px; font-family: ui-monospace, monospace; word-break: break-all; }
+nav { display: flex; gap: 4px; padding: 0 16px; background: var(--panel); border-bottom: 1px solid var(--line);
+  overflow-x: auto; }
+nav button { border: 0; background: none; color: var(--muted); padding: 10px 12px; cursor: pointer;
+  border-bottom: 2px solid transparent; font: inherit; white-space: nowrap; }
+nav button.on { color: var(--text); border-bottom-color: var(--accent); }
+main { padding: 16px; max-width: 1400px; margin: 0 auto; }
+section { display: none; } section.on { display: block; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin-bottom: 16px; }
+.card h2 { font-size: 14px; margin: 0 0 10px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+label.inline { flex-direction: row; align-items: center; gap: 6px; color: var(--text); font-size: 14px; }
+select, input[type=number], input[type=search] { font: inherit; padding: 6px 8px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--bg); color: var(--text); }
+button.btn { font: inherit; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--text); cursor: pointer; }
+button.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.btn.danger { color: var(--fail); border-color: var(--fail); }
+button.btn:disabled { opacity: .5; cursor: default; }
+.pill { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+.s-pass, .s-done { color: var(--pass); background: var(--pass-bg); }
+.s-fail, .s-interrupted { color: var(--fail); background: var(--fail-bg); }
+.s-warn, .s-partial { color: var(--warn); background: var(--warn-bg); }
+.s-running { color: var(--run); background: var(--run-bg); }
+.s-pending, .s-info { color: var(--muted); background: var(--code); }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+.pipeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.stage { border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: var(--bg); }
+.stage .t { display: flex; justify-content: space-between; align-items: center; font-weight: 600; margin-bottom: 6px; }
+.stage .m { font-size: 12px; color: var(--muted); }
+.stage details { margin-top: 6px; font-size: 12px; }
+.stage details li { list-style: none; display: flex; justify-content: space-between; gap: 6px; }
+.stage details ul { padding: 0; margin: 4px 0 0; }
+.stage a, .linkish { color: var(--accent); cursor: pointer; text-decoration: none; }
+pre.log { background: var(--code); border: 1px solid var(--line); border-radius: 6px; padding: 10px; margin: 0;
+  height: 420px; overflow: auto; font: 12px/1.4 ui-monospace, "SFMono-Regular", Menlo, monospace; white-space: pre-wrap;
+  word-break: break-all; }
+.log .e { color: var(--fail); } .log .w { color: var(--warn); }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+td.c-pass { color: var(--pass); } td.c-fail { color: var(--fail); background: var(--fail-bg); font-weight: 600; }
+.summary { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.tile { border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: var(--bg); }
+.tile .l { font-size: 12px; color: var(--muted); }
+.tile .v { font-size: 20px; font-weight: 600; margin: 2px 0; font-variant-numeric: tabular-nums; }
+.files { display: grid; grid-template-columns: minmax(220px, 320px) 1fr; gap: 16px; }
+.filelist { max-height: 620px; overflow: auto; border: 1px solid var(--line); border-radius: 6px; }
+.filelist h3 { font-size: 12px; text-transform: uppercase; color: var(--muted); margin: 0; padding: 8px 10px;
+  background: var(--code); position: sticky; top: 0; }
+.filelist div.f { padding: 5px 10px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px;
+  font-size: 13px; border-bottom: 1px solid var(--line); }
+.filelist div.f:hover, .filelist div.f.on { background: var(--run-bg); }
+.filelist div.f span:last-child { color: var(--muted); font-size: 12px; white-space: nowrap; }
+#viewer { height: 620px; }
+.muted { color: var(--muted); }
+.notice { padding: 8px 12px; border-radius: 6px; margin-bottom: 12px; }
+.layouts { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.layouts figure { margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.layouts img { width: 100%; display: block; background: #000; cursor: zoom-in; }
+.layouts figcaption { padding: 8px 10px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 13px; }
+#toast { position: fixed; bottom: 16px; right: 16px; max-width: min(480px, calc(100vw - 32px)); padding: 10px 14px;
+  border-radius: 8px; background: var(--text); color: var(--bg); display: none; z-index: 10; }
+@media (max-width: 720px) {
+  .files { grid-template-columns: 1fr; }
+  .filelist { max-height: 260px; }
+  #viewer { height: 420px; }
+  .tools { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>CVA6 · asap7 RTL-to-GDS</h1>
+    <div class="flow" id="flowPath"></div>
+  </div>
+  <label>Variant
+    <select id="variant">
+      <option value="hier">hier (config_hier.mk)</option>
+      <option value="base">base (config.mk)</option>
+    </select>
+  </label>
+  <div class="tools" id="tools"></div>
+</header>
+<nav>
+  <button data-tab="run" class="on">Run</button>
+  <button data-tab="checks">Checks</button>
+  <button data-tab="files">Reports &amp; logs</button>
+  <button data-tab="layout">Layout</button>
+</nav>
+<main>
+  <section id="tab-run" class="on">
+    <div id="notices"></div>
+    <div class="card">
+      <h2>Run the flow</h2>
+      <div class="row">
+        <label>Run up to stage
+          <select id="stage">
+            <option>synth</option><option>floorplan</option><option>place</option>
+            <option>cts</option><option>route</option><option selected>final</option>
+          </select>
+        </label>
+        <label>Threads (-j)<input type="number" id="jobs" min="1" value="4" style="width:80px"></label>
+        <label class="inline"><input type="checkbox" id="clean"> Clean results first (-c)</label>
+        <button class="btn primary" id="runBtn">Run</button>
+        <button class="btn danger" id="stopBtn" disabled>Stop</button>
+        <span id="jobStatus" class="muted"></span>
+      </div>
+      <p class="muted" style="margin:10px 0 0;font-size:12px">Runs <code>run_cva6_asap7.sh</code>. Finished stages are reused,
+        so “final” continues from where the last run stopped. The full log is also written to <code>run_logs/</code>.</p>
+    </div>
+    <div class="card">
+      <h2>Stages</h2>
+      <div class="pipeline" id="pipeline"></div>
+    </div>
+    <div class="card">
+      <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h2 style="margin:0">Output</h2>
+        <label class="inline"><input type="checkbox" id="follow" checked> Follow</label>
+      </div>
+      <pre class="log" id="jobLog"><span class="muted">No run started from this window yet.</span></pre>
+    </div>
+  </section>
+
+  <section id="tab-checks">
+    <div class="card">
+      <h2>Sign-off checks <span class="muted" id="sumStage" style="font-weight:400"></span></h2>
+      <div class="summary" id="summary"></div>
+    </div>
+    <div class="card">
+      <h2>Metrics by stage</h2>
+      <div class="tablewrap"><table id="metrics"></table></div>
+      <p class="muted" style="font-size:12px;margin:8px 0 0">From the ORFS metrics JSON of each stage
+        (<code>logs/…/*.json</code>). Red cells fail: negative slack or a non-zero violation count.</p>
+    </div>
+  </section>
+
+  <section id="tab-files">
+    <div class="files">
+      <div>
+        <input type="search" id="fileFilter" placeholder="Filter files" style="width:100%;margin-bottom:8px">
+        <div class="filelist" id="filelist"></div>
+      </div>
+      <div>
+        <div class="row" style="margin-bottom:8px;align-items:center">
+          <strong id="viewerName" class="muted">Pick a file</strong>
+          <input type="search" id="grep" placeholder="Show only lines matching…" style="flex:1;min-width:160px">
+          <label class="inline"><input type="checkbox" id="onlyIssues"> Errors &amp; warnings only</label>
+        </div>
+        <pre class="log" id="viewer"></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-layout">
+    <div class="card">
+      <h2>Render a layout</h2>
+      <div class="row">
+        <label>Database<select id="odb"></select></label>
+        <button class="btn primary" id="renderBtn">Render PNG</button>
+        <label>Open interactively<select id="guiTarget"></select></label>
+        <button class="btn" id="guiBtn">Open in OpenROAD GUI</button>
+      </div>
+      <p class="muted" style="margin:10px 0 0;font-size:12px">Rendering runs OpenROAD offscreen
+        (same as <code>report_assets/snap_place.tcl</code>) and takes a minute or two on this design. It can't run while
+        a flow run is going. The OpenROAD GUI needs a display.</p>
+    </div>
+    <div class="layouts" id="layouts"></div>
+  </section>
+</main>
+<div id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const api = (path, params = {}) => fetch(`${path}?${new URLSearchParams({variant: variant(), ...params})}`);
+const post = (path, body) => fetch(path, {method: "POST", headers: {"Content-Type": "application/json", "X-Flow-Gui": "1"},
+  body: JSON.stringify({variant: variant(), ...body})}).then(async r => { const j = await r.json(); if (!r.ok) throw new Error(j.error); return j; });
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const fmtDur = s => { if (!s) return "–"; s = Math.round(s); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60);
+  return h ? `${h}h ${m}m` : m ? `${m}m ${s % 60}s` : `${s}s`; };
+const fmtSize = b => b > 1 << 20 ? (b / (1 << 20)).toFixed(1) + " MB" : b > 1024 ? Math.round(b / 1024) + " KB" : b + " B";
+const fmtNum = v => typeof v === "number" ? v.toLocaleString(undefined, {maximumFractionDigits: 3}) : v;
+const ago = t => { const s = Date.now() / 1000 - t; return s < 90 ? "just now" : s < 5400 ? Math.round(s / 60) + " min ago"
+  : s < 172800 ? Math.round(s / 3600) + " h ago" : new Date(t * 1000).toLocaleDateString(); };
+
+function store(k, v) { try { v === undefined ? (v = localStorage.getItem(k)) : localStorage.setItem(k, v); } catch (e) {} return v; }
+function variant() { return $("variant").value; }
+function toast(msg, ms = 4000) { const t = $("toast"); t.textContent = msg; t.style.display = "block";
+  clearTimeout(toast.h); toast.h = setTimeout(() => t.style.display = "none", ms); }
+
+// Tabs
+let tab = store("tab") || "run";
+function showTab(name) {
+  tab = name; store("tab", name);
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.tab === name));
+  document.querySelectorAll("main section").forEach(s => s.classList.toggle("on", s.id === "tab-" + name));
+  if (name === "checks") loadChecks();
+  if (name === "files") loadFiles();
+  if (name === "layout") loadSnapshots();
+}
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => showTab(b.dataset.tab));
+
+// State and pipeline
+let state = null;
+async function loadState() {
+  try { state = await (await api("/api/state")).json(); } catch (e) { return; }
+  $("flowPath").textContent = state.flow;
+  $("tools").innerHTML = Object.entries(state.tools).map(([t, p]) =>
+    `<span class="pill ${p ? "s-pass" : "s-fail"}" title="${esc(p || "not on PATH")}">${t}</span>`).join("");
+
+  const notes = [];
+  if (!state.flow_exists) notes.push(["fail", `Missing ${state.config} in the flow directory.`]);
+  if (!state.tools.openroad || !state.tools.yosys) notes.push(["fail", "openroad or yosys is not on PATH; runs will fail. See README Step 1."]);
+  state.external.forEach(x => notes.push(["warn", `A flow run started outside this window is active (pid ${x.pid}): <code>${esc(x.cmd)}</code>. Its log is the newest file in run_logs/.`]));
+  $("notices").innerHTML = notes.map(([s, m]) => `<div class="notice s-${s}">${m}</div>`).join("");
+
+  $("pipeline").innerHTML = state.stages.map(st => `
+    <div class="stage">
+      <div class="t"><span>${st.name}</span><span class="pill s-${st.status}">${st.status}</span></div>
+      <div class="m">${fmtDur(st.elapsed_s)}${st.peak_mb ? ` · peak ${(st.peak_mb / 1024).toFixed(1)} GB` : ""}</div>
+      ${st.steps.length ? `<details><summary class="muted">${st.steps.length} step${st.steps.length > 1 ? "s" : ""}</summary><ul>
+        ${st.steps.map(s => `<li><a data-log="${esc(s.log)}">${esc(s.name)}</a><span class="${s.state === "done" ? "muted" : "pill s-" + s.state}">${s.state === "done" ? fmtDur(s.elapsed_s) : s.state}</span></li>`).join("")}
+      </ul></details>` : ""}
+    </div>`).join("");
+  $("pipeline").querySelectorAll("a[data-log]").forEach(a => a.onclick = () => { showTab("files"); openFile("logs", a.dataset.log); });
+
+  const job = state.job, busy = job.running;
+  $("runBtn").disabled = busy; $("stopBtn").disabled = !busy; $("renderBtn").disabled = busy;
+  $("jobStatus").innerHTML = busy ? `<span class="pill s-running">${job.kind} running</span> ${fmtDur(Date.now() / 1000 - job.started)}`
+    : job.rc === null ? "" : `<span class="pill ${job.rc === 0 ? "s-pass" : "s-fail"}">${job.kind} exit ${job.rc}</span> after ${fmtDur(job.ended - job.started)}`;
+
+  fillSelect($("odb"), state.odbs, state.odbs.length ? "" : "nothing built yet");
+  fillSelect($("guiTarget"), state.gui_targets, "nothing built yet");
+  $("guiBtn").disabled = !state.gui_targets.length;
+
+  if (busy || job.size !== lastJobSize) pollLog();
+  if (prevRunning && !busy) { // a job just finished: refresh the views it affects
+    if (job.kind === "render") loadSnapshots();
+    if (tab === "checks") loadChecks();
+  }
+  prevRunning = busy;
+}
+let prevRunning = false;
+function fillSelect(sel, items, empty) {
+  const keep = sel.value;
+  sel.innerHTML = items.length ? items.map(i => `<option>${esc(i)}</option>`).join("") : `<option value="">${empty}</option>`;
+  if (items.includes(keep)) sel.value = keep; else if (items.length) sel.value = items[items.length - 1];
+}
+
+// Job log streaming
+let lastJobSize = 0, jobText = "";
+async function pollLog() {
+  const r = await (await api("/api/job_log", {offset: lastJobSize})).json();
+  if (r.size < lastJobSize) jobText = "";
+  if (r.text) jobText = (jobText + r.text).slice(-400000);
+  lastJobSize = r.size;
+  if (!r.job.kind) return;
+  const pre = $("jobLog");
+  pre.innerHTML = colorize(jobText);
+  if ($("follow").checked) pre.scrollTop = pre.scrollHeight;
+}
+function colorize(text) {
+  return esc(text).replace(/^.*(\[ERROR|Error|error:|FAILED|\*\*\* ).*$/gm, '<span class="e">$&</span>')
+    .replace(/^.*\[WARNING.*$/gm, '<span class="w">$&</span>');
+}
+
+$("runBtn").onclick = async () => {
+  const stage = $("stage").value, clean = $("clean").checked;
+  if (clean && !confirm(`Delete all ${variant()} results, logs and reports, then run up to ${stage}? Synthesis alone takes about 2 hours.`)) return;
+  try {
+    await post("/api/run", {stage, clean, jobs: +$("jobs").value});
+    lastJobSize = 0; jobText = ""; toast(`Started ${variant()} flow up to ${stage}`); loadState();
+  } catch (e) { toast(e.message); }
+};
+$("stopBtn").onclick = async () => {
+  if (!confirm("Stop the running job? The current step's partial output is kept as a .tmp.log.")) return;
+  try { await post("/api/stop", {}); toast("Stop sent"); } catch (e) { toast(e.message); }
+};
+
+// Checks
+async function loadChecks() {
+  const c = await (await api("/api/checks")).json();
+  $("sumStage").textContent = c.columns.length ? `· latest stage with metrics: ${c.columns[c.columns.length - 1]}` : "";
+  $("summary").innerHTML = c.summary.length ? c.summary.map(s => `
+    <div class="tile">
+      <div class="l">${esc(s.label)}</div>
+      <div class="v">${fmtNum(s.value)}</div>
+      <span class="pill s-${s.s}">${s.s}</span> <span class="muted" style="font-size:12px">${esc(s.stage)}</span>
+      ${s.file ? ` · <a class="linkish" data-file="${esc(s.file)}">open</a>` : ""}
+    </div>`).join("") : `<p class="muted">No metrics yet. Run at least synthesis.</p>`;
+  $("summary").querySelectorAll("a[data-file]").forEach(a => a.onclick = () => {
+    const [kind, ...rest] = a.dataset.file.split("/"); showTab("files"); openFile(kind, rest.join("/")); });
+  $("metrics").innerHTML = c.columns.length ? `<thead><tr><th>Metric</th>${c.columns.map(x => `<th>${x}</th>`).join("")}</tr></thead>
+    <tbody>${c.rows.map(r => `<tr><td>${esc(r.label)}</td>${r.cells.map(x => x ? `<td class="c-${x.s}">${fmtNum(x.v)}</td>` : `<td class="muted">–</td>`).join("")}</tr>`).join("")}</tbody>` : "";
+}
+
+// Files
+let files = null, current = null, currentText = "";
+async function loadFiles() {
+  files = await (await api("/api/files")).json();
+  renderFileList();
+}
+function renderFileList() {
+  if (!files) return;
+  const f = $("fileFilter").value.toLowerCase();
+  const group = (title, kind, list) => {
+    const items = list.filter(x => x.name.toLowerCase().includes(f));
+    return `<h3>${title} (${items.length})</h3>` + items.map(x =>
+      `<div class="f ${current && current.kind === kind && current.name === x.name ? "on" : ""}" data-kind="${kind}" data-name="${esc(x.name)}" title="${ago(x.mtime)}">
+        <span>${esc(x.name)}</span><span>${fmtSize(x.size)}</span></div>`).join("");
+  };
+  $("filelist").innerHTML = group("Reports", "reports", files.reports) + group("Stage logs", "logs", files.logs)
+    + group("Run logs", "runlogs", files.runlogs);
+  $("filelist").querySelectorAll("div.f").forEach(d => d.onclick = () => openFile(d.dataset.kind, d.dataset.name));
+}
+async function openFile(kind, name) {
+  current = {kind, name};
+  if (!files) await loadFiles(); else renderFileList();
+  $("viewerName").textContent = `${kind}/${name}`;
+  $("viewer").textContent = "Loading…";
+  const r = await api("/api/file", {kind, name});
+  currentText = r.ok ? await r.text() : `Could not open: ${(await r.json()).error}`;
+  renderViewer();
+}
+function renderViewer() {
+  let lines = currentText.split("\n");
+  const g = $("grep").value.toLowerCase();
+  if ($("onlyIssues").checked) lines = lines.filter(l => /error|warning|violation|fail/i.test(l));
+  if (g) lines = lines.filter(l => l.toLowerCase().includes(g));
+  $("viewer").innerHTML = colorize(lines.join("\n")) || '<span class="muted">No matching lines.</span>';
+}
+$("fileFilter").oninput = renderFileList;
+$("grep").oninput = renderViewer;
+$("onlyIssues").onchange = renderViewer;
+
+// Layout
+async function loadSnapshots() {
+  const snaps = await (await api("/api/snapshots")).json();
+  $("layouts").innerHTML = snaps.length ? snaps.map(s => {
+    const url = `/api/file?${new URLSearchParams({variant: variant(), kind: "snapshots", name: s.name, t: s.mtime})}`;
+    return `<figure><a href="${url}" target="_blank"><img src="${url}" alt="${esc(s.name)} layout"></a>
+      <figcaption><strong>${esc(s.name.replace(".png", ""))}</strong><span class="muted">rendered ${ago(s.mtime)}</span></figcaption></figure>`;
+  }).join("") : `<p class="muted">No renders yet for ${variant()}. Pick a database above and press Render PNG.</p>`;
+}
+$("renderBtn").onclick = async () => {
+  if (!$("odb").value) return;
+  try { await post("/api/render", {odb: $("odb").value}); lastJobSize = 0; jobText = "";
+    toast(`Rendering ${$("odb").value}; progress is in the Run tab output`); loadState(); } catch (e) { toast(e.message); }
+};
+$("guiBtn").onclick = async () => {
+  try { const r = await post("/api/open_gui", {target: $("guiTarget").value}); toast(`Launched: ${r.cmd}`); } catch (e) { toast(e.message); }
+};
+
+// Variant
+$("variant").value = store("variant") || "hier";
+$("variant").onchange = () => { store("variant", variant()); files = null; current = null; loadState(); showTab(tab); };
+
+showTab(tab);
+loadState();
+setInterval(loadState, 2000);
+</script>
+</body>
+</html>
