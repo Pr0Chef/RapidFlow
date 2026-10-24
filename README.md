@@ -3,10 +3,11 @@
 Everything needed to run the CVA6 core through the ORFS flow on the asap7 platform, from a fresh clone.
 The flow is vendored in `orfs/`, a trimmed copy of [OpenROAD-flow-scripts](https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts):
 `Makefile`, `scripts/`, `util/`, `platforms/asap7` and `platforms/common`, plus the CVA6 design and sources.
-The OpenROAD and Yosys binaries are not included; Step 1 covers installing them.
+Yosys comes as a git submodule in `yosys/`, on a branch whose `abc_new` pass runs ABC on several modules at once
+(see [Parallel abc_new](#parallel-abc_new)). The OpenROAD binary is not included; Step 1 covers installing it.
 
 Contents: [Requirements](#requirements) · [The CVA6 RTL](#the-cva6-rtl) · [Step by step](#step-by-step) · [GUI](#gui) · [What is configured](#what-is-configured) ·
-[Status](#status) · [Troubleshooting](#troubleshooting) · [Other files](#other-files) · [Licenses](#licenses)
+[Parallel abc_new](#parallel-abc_new) · [Status](#status) · [Troubleshooting](#troubleshooting) · [Other files](#other-files) · [Licenses](#licenses)
 
 ## Requirements
 
@@ -15,7 +16,8 @@ These are the versions the flow was run with. Other versions may work but were n
 | Tool | Version used | Where to get it |
 | --- | --- | --- |
 | OpenROAD | `26Q4-271-g0907a8656e` | [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD), or built by ORFS (Step 1) |
-| Yosys | `0.69+274` (git `7513f8df8`), with the built-in `read_slang` frontend | [Yosys](https://github.com/YosysHQ/yosys), or built by ORFS (Step 1). The slang frontend comes from [yosys-slang](https://github.com/povik/yosys-slang) |
+| Yosys | The `yosys/` submodule: [Pr0Chef/yosys](https://github.com/Pr0Chef/yosys/tree/abc-new-parallel) branch `abc-new-parallel` at `7b7e811cb`, which is upstream `0.69+274` (git `7513f8df8`) plus parallel `abc_new`. It builds with the `read_slang` frontend | Built from the submodule (Step 2). Stock Yosys `0.69+274` also runs the flow, with `abc_new` on one core. The slang frontend comes from [yosys-slang](https://github.com/povik/yosys-slang) |
+| CMake, a C++17 compiler | any recent | your package manager; only to build the Yosys submodule |
 | KLayout | `0.28.16`, only for the final GDS step | [klayout.de/build.html](https://www.klayout.de/build.html), or `apt` on Ubuntu |
 | GNU Make, Python 3, Git | any recent | your package manager |
 | Memory | 16 GB or more recommended | detailed routing peaks at about 7 GB |
@@ -90,14 +92,35 @@ klayout -v
 yosys -p "help read_slang" | head -5   # must print the read_slang help, not "No such command"
 ```
 
-### Step 2: clone this repo
+### Step 2: clone this repo and build Yosys
 
 ```bash
-git clone git@github.com:Pr0Chef/openpd_work.git
-cd openpd_work
+git clone --recurse-submodules git@github.com:Pr0Chef/RapidFlow.git
+cd RapidFlow
 ```
 
-The clone is about 430 MB. Use `https://github.com/Pr0Chef/openpd_work.git` if you do not have SSH access to GitHub.
+The repo itself is about 430 MB; the Yosys submodule and its own submodules (ABC, slang and a few libraries) come
+on top. Use `https://github.com/Pr0Chef/RapidFlow.git` if you do not have SSH access to GitHub. In a clone made
+without `--recurse-submodules`, fetch them with:
+
+```bash
+git submodule update --init --recursive
+```
+
+Build Yosys from the submodule and point the flow at it. The tested build used CMake's defaults; the first build
+takes a while:
+
+```bash
+cmake -S yosys -B yosys/build
+cmake --build yosys/build -j"$(nproc)"
+export YOSYS_EXE="$PWD/yosys/build/yosys"
+"$YOSYS_EXE" -V                                       # should report git sha1 7b7e811cb
+"$YOSYS_EXE" -p "help read_slang" | head -5           # must print the read_slang help
+```
+
+`yosys-abc` is built next to `yosys` in `yosys/build/`, which is where `abc_new` looks for it. `run_cva6_asap7.sh`
+uses `$YOSYS_EXE` when it is set, and otherwise the `yosys` on your `PATH`. To use a Yosys you installed in Step 1
+instead, leave `YOSYS_EXE` unset.
 
 ### Step 3: check your machine
 
@@ -116,8 +139,10 @@ without a desktop session.
 ./run_cva6_asap7.sh -H -c
 ```
 
-`-H` selects hierarchical synthesis and `-c` cleans earlier results. Measured on this design: canonicalize takes
-about 95 seconds and the main synthesis about 2 hours (1 h 58 min). Watch progress from a second terminal:
+`-H` selects hierarchical synthesis and `-c` cleans earlier results. Measured on this design with stock Yosys:
+canonicalize takes about 95 seconds and the main synthesis about 2 hours (1 h 58 min), of which `abc_new` was
+1,434 s. With the submodule's parallel `abc_new` that step is shorter; see [Parallel abc_new](#parallel-abc_new).
+Watch progress from a second terminal:
 
 ```bash
 tail -f orfs/flow/logs/asap7/cva6/hier/1_2_yosys.log
@@ -265,7 +290,36 @@ runs, so do not bind it to a public address with `--host`.
   At 910 the floorplan timing repair started at a worst slack of -3,330 ps and made little progress. Placement
   slack at 5000 is about +3,300 ps, so a period near 2 ns looks reachable but is untested.
 - `run_cva6_asap7.sh`: options `-H` hierarchical, `-s STAGE` last stage (`synth`, `floorplan`, `place`, `cts`,
-  `route`, `final`), `-c` clean first, `-j N` threads. Set `ORFS_FLOW` to use a different ORFS checkout.
+  `route`, `final`), `-c` clean first, `-j N` threads. Set `ORFS_FLOW` to use a different ORFS checkout, and
+  `YOSYS_EXE` / `OPENROAD_EXE` to pick the tool binaries.
+- `yosys/`: the Yosys submodule with parallel `abc_new` (next section).
+
+## Parallel abc_new
+
+CVA6's `config.mk` sets `SWAP_ARITH_OPERATORS = 1`, so ORFS maps the design with `abc_new` rather than `abc`.
+Upstream `abc_new` maps one module at a time on a single core. The submodule's `abc_new` writes each module's ABC
+input on the main thread, runs the `yosys-abc` processes on a thread pool, and reads the results back in a fixed
+order, so the output does not depend on timing or on the number of threads above 1.
+
+| Setting | Effect |
+| --- | --- |
+| `abc_new` (no option, as ORFS calls it) | Up to one ABC process per core |
+| `abc_new -j <num>` | At most `<num>` ABC processes; `-j 1` is the original sequential loop |
+| `YOSYS_MAX_THREADS=<num>` | Caps the default number of ABC processes |
+
+Measured on the hierarchical CVA6 design (93 modules) by replaying only `abc_new` on a snapshot taken just before
+it, on an 8-thread i5-1235U with 10 GB RAM:
+
+| Run | `abc_new` wall time | Peak memory |
+| --- | --- | --- |
+| `-j 1` (sequential) | 2,052 s | 2,051 MB |
+| `-j 8` | 1,398 to 1,730 s over three runs | about 1,610 MB |
+
+The mapped cells match the sequential run in every module (818,111 cells), and `-j 4` and `-j 8` give byte-identical
+netlists. The speedup is limited by serial Yosys work around ABC, chiefly whole-design buffer normalization in
+`write_xaiger2` and `portarcs` (about 740 s). A full ORFS run end to end with this build has not been done yet. The
+design, the two bugs found on CVA6 and the open work are in
+[docs/Parallel_abc_new_in_Yosys.pdf](docs/Parallel_abc_new_in_Yosys.pdf).
 
 ## Status
 
@@ -280,7 +334,9 @@ interrupted by memory pressure and has not finished, so no `6_final.gds` exists 
   wrapper script, or export `OPENROAD_EXE` and `YOSYS_EXE` as in Step 7.
 - **A stage stops with no error, mid-routing.** Look for memory pressure:
   `journalctl --since "1 hour ago" | grep -iE "oomd|oom-kill"`. Free memory, add RAM, or run without a desktop session.
-- **`read_slang` is not found.** Your Yosys lacks the slang frontend. Build Yosys through ORFS (Step 1, Option A).
+- **`read_slang` is not found.** Your Yosys lacks the slang frontend. Build Yosys from the submodule (Step 2),
+  making sure `git submodule update --init --recursive` fetched `yosys/libs/slang`, or build it through ORFS (Step 1, Option A).
+- **`yosys/` is empty.** The clone was made without submodules. Run `git submodule update --init --recursive`.
 - **Timing repair runs for hours during floorplan.** The clock is too tight for the netlist. Use `config_hier.mk`
   (5000 ps) rather than the stock `config.mk`.
 - **Rerun from scratch.** Add `-c`, for example `./run_cva6_asap7.sh -H -c -s place`.
@@ -288,6 +344,7 @@ interrupted by memory pressure and has not finished, so no `6_final.gds` exists 
 ## Other files
 
 - `CVA6_asap7_synthesis_log.pdf`: write-up of the work, the results and the problems hit.
+- `docs/Parallel_abc_new_in_Yosys.pdf`: change report for the parallel `abc_new` work.
 - `report_assets/`: placement layout image and the script that renders it.
 - `orfs_overlay/designs/sky130hd/cva6/`: an unfinished sky130hd attempt (slang frontend, flop-based RAM
   stand-ins). It needs the sky130hd platform from a full ORFS checkout and never completed.
