@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Add "ORFS Flow Runner" to the desktop's application menu (and the Desktop folder, if there is one).
+# Add "ORFS Flow Runner" to the desktop's application menu (and the Desktop folder, if there is one),
+# running it from this checkout. To install it system-wide instead, build the .deb with gui/packaging/build_deb.sh.
 # Usage: gui/install_launcher.sh [--uninstall]
 set -euo pipefail
 
@@ -15,13 +16,13 @@ if [ "${1:-}" = "--uninstall" ]; then
 fi
 
 mkdir -p "$APPS"
-# The menu entry starts with a minimal PATH, so record where the tools are now.
+# Tool locations are set in the app (Tools…), so the entry does not need to carry a PATH.
 cat > "$APPS/$NAME" <<EOF
 [Desktop Entry]
 Type=Application
 Name=ORFS Flow Runner
 Comment=Run OpenROAD-flow-scripts designs from RTL to GDS
-Exec=env PATH=$PATH python3 "$APP"
+Exec=python3 "$APP"
 Icon=applications-engineering
 Terminal=false
 Categories=Development;Electronics;

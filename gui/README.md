@@ -5,8 +5,43 @@ and stage range from drop-down menus, press Run, and read the results in separat
 **Debug** tabs. It drives the stock ORFS Makefile, so a run here gives the same result as the same `make` command
 in a terminal.
 
-Contents: [Requirements](#requirements) · [Step by step](#step-by-step) · [The menus](#the-menus) ·
+Contents: [Install](#install) · [Requirements](#requirements) · [Step by step](#step-by-step) · [The menus](#the-menus) ·
 [The tabs](#the-tabs) · [Common tasks](#common-tasks) · [Troubleshooting](#troubleshooting) · [Files](#files)
+
+## Install
+
+The app ships as a Debian package for Ubuntu (and other Debian-based systems). It installs under
+`/opt/orfs-flow-runner`, adds **ORFS Flow Runner** to the app menu and adds an `orfs-flow-runner` command.
+
+1. **Build the package** from a checkout of this repo (or take the `.deb` someone built for you):
+
+   ```bash
+   gui/packaging/build_deb.sh
+   ```
+
+   This writes `dist/orfs-flow-runner_<version>_all.deb`. The version is `VERSION` in `gui/orfs_app.py`.
+
+2. **Install it.** apt also installs GTK, PyGObject, make and KLayout if they are missing:
+
+   ```bash
+   sudo apt install ./dist/orfs-flow-runner_1.0.0_all.deb
+   ```
+
+3. **Install OpenROAD, Yosys and an ORFS checkout** if you don't have them; the package doesn't include them
+   (see [Requirements](#requirements)).
+
+4. **Start ORFS Flow Runner** from the app menu. On the first start it asks for the ORFS `flow/` folder unless it
+   finds one in `$ORFS_FLOW` or `~/OpenROAD-flow-scripts/flow`.
+
+5. **Check Debug → Environment.** If openroad, yosys or klayout shows *NOT FOUND*, click **Tools…** in the title
+   bar and choose the program. *Automatic* uses the one on `PATH`, else one in `/usr/local/bin`, `/usr/bin`,
+   `/opt/openroad/bin` or `~/.local/bin`.
+
+To update, build and install the newer `.deb` the same way. To remove it: `sudo apt remove orfs-flow-runner`
+(your settings and run logs in your home folder are kept).
+
+If you used `gui/install_launcher.sh` before, run `gui/install_launcher.sh --uninstall` first: its menu entry
+has the same name and would hide the installed one.
 
 ## Requirements
 
@@ -29,24 +64,26 @@ clone has 85 designs on 9 platforms, 71 of them runnable (gf12 and gf55 need PDK
 This runs the small `gcd` design on nangate45 (7 min 51 s on 4 cores in testing). CVA6 works the same way; only
 the choices and the run time change.
 
-1. **Start the app** from the repo root:
+1. **Start the app** from the app menu if you [installed](#install) it, or from the repo root without
+   installing:
 
    ```bash
    python3 gui/orfs_app.py
    ```
 
    It opens the flow folder you used last, else `$ORFS_FLOW`, else `./OpenROAD-flow-scripts/flow`, else
-   `./orfs/flow`. The title bar shows which one. To pick another, click **Flow folder…** or start with
-   `--flow /path/to/OpenROAD-flow-scripts/flow`.
+   `./orfs/flow`, else `~/OpenROAD-flow-scripts/flow`. The title bar shows which one. To pick another, click
+   **Flow folder…** or start with `--flow /path/to/OpenROAD-flow-scripts/flow`.
 
-2. **Optional: add it to the app menu and the Desktop**, so you can start it without a terminal:
+2. **Optional, when running from the checkout: add it to the app menu and the Desktop** without installing the
+   package:
 
    ```bash
    gui/install_launcher.sh
    ```
 
-   The launcher records your current `PATH` so it finds OpenROAD and Yosys. Run it again if the tools move;
-   `gui/install_launcher.sh --uninstall` removes it.
+   `gui/install_launcher.sh --uninstall` removes it. Programs are found as described under **Tools…** in
+   [Install](#install).
 
 3. **Platform:** choose `nangate45`. The number after each name is its design count. Platforms marked
    *PDK not installed* can't be selected.
@@ -110,13 +147,13 @@ The app remembers your choices for the next start.
     by stage (synth, floorplan, place, cts, grt, route, final). Red fails: negative slack or a non-zero count. The
     numbers come from the ORFS metrics JSON in `logs/<platform>/<design>/<variant>/`.
   - *Report files*: the design's `reports/` folder, with a line filter and an errors-and-warnings-only view.
-- **Logs:** stage logs (`logs/…`, one per step; `.tmp.log` = running or killed) and run logs (`run_logs/`, one per
-  run, newest first). Filter lines, show only errors and warnings, or tick **Follow** to watch a log being written.
+- **Logs:** stage logs (`logs/…`, one per step; `.tmp.log` = running or killed) and run logs (`~/.local/share/orfs-flow-runner/run_logs/`,
+  one per run, newest first). Filter lines, show only errors and warnings, or tick **Follow** to watch a log being written.
 - **Debug:**
   - *Actions*: **Dry run (make -n)**, **Open in OpenROAD GUI** for a built stage (needs a display), **Open
     results folder**, **Copy command** (to run the plan in a terminal).
   - *Environment*: flow folder, openroad/yosys/klayout versions and paths, whether Yosys has `read_slang`, CPU
-    count, free memory, flow git commit.
+    count, free memory, run-log folder, flow git commit.
   - *Resolved make variables*: `PLATFORM`, `DESIGN_NICKNAME`, `FLOW_VARIANT`, `RESULTS_DIR`, `SDC_FILE`,
     `CORE_UTILIZATION`, `PLACE_DENSITY`, `VERILOG_FILES` and others, as `make print-<VAR>` reports them.
   - *Errors and warnings*: a count of every message ID (for example `RSZ-0104`) in the design's logs, errors
@@ -142,15 +179,15 @@ its live status.
 | Problem | What to do |
 | --- | --- |
 | `No module named gi` at start | `sudo apt install python3-gi gir1.2-gtk-3.0`, and use the system `python3`, not a venv |
-| A run fails at once with error 127 | OpenROAD or Yosys is not on `PATH`: check **Debug → Environment**. For the menu launcher, rerun `gui/install_launcher.sh` |
+| A run fails at once with error 127 | OpenROAD or Yosys wasn't found: check **Debug → Environment** and choose the program with **Tools…** |
 | The Platform menu is empty | the folder isn't an ORFS `flow/` folder: use **Flow folder…** |
 | A stage shows *interrupted* | the step was killed, usually for lack of memory. Look for `oomd` or `oom-kill` in `journalctl --since "1 hour ago"`, use fewer cores, then run again with *Continue* |
 | `read_slang` not found (CVA6) | **Debug** shows *read_slang missing*: build Yosys with the slang frontend (repo README, Step 1) |
 | Make variables show *make error* | the config doesn't parse; the message is in **Debug output** |
-| Open in OpenROAD GUI does nothing | it needs a display; see `gui/.cache/openroad_gui.log` |
+| Open in OpenROAD GUI does nothing | it needs a display; see `~/.cache/orfs-flow-runner/openroad_gui.log` |
 
 Limits: one run at a time per window; only runs started from the app show as *running*; viewers show the last
-4 MB of a log (the full output is always in `run_logs/`).
+4 MB of a log (the full output is always in the run log).
 
 ## Files
 
@@ -158,9 +195,11 @@ Limits: one run at a time per window; only runs started from the app show as *ru
 | --- | --- |
 | `gui/orfs_app.py` | the app |
 | `gui/flow_gui.py` | the CVA6 web console; the app reuses its metric definitions, so keep both together |
-| `gui/install_launcher.sh` | adds or removes the menu and Desktop launcher |
-| `~/.config/orfs-flow-runner/settings.json` | last flow folder and menu choices |
-| `run_logs/` | one full log per run: `<platform>_<design>_<variant>_<from>-<to>_<date>_<time>.log` |
+| `gui/install_launcher.sh` | adds or removes a menu and Desktop launcher for running from the checkout |
+| `gui/packaging/build_deb.sh` | builds the `.deb`; `orfs-flow-runner.desktop` and `.svg` are its menu entry and icon |
+| `~/.config/orfs-flow-runner/settings.json` | last flow folder, menu choices and the programs chosen with **Tools…** |
+| `~/.local/share/orfs-flow-runner/run_logs/` | one full log per run: `<platform>_<design>_<variant>_<from>-<to>_<date>_<time>.log` |
+| `~/.cache/orfs-flow-runner/` | OpenROAD GUI log; safe to delete |
 | `<flow>/results/<platform>/<design>/<variant>/` | ORFS results: one `.odb` per stage, `6_final.gds` |
 | `<flow>/logs/…`, `<flow>/reports/…` | ORFS step logs (with metrics JSON) and reports |
-| `gui/.cache/` | OpenROAD GUI log and web-console renders; safe to delete, ignored by git |
+| `gui/.cache/` | web-console renders; safe to delete, ignored by git |

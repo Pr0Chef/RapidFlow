@@ -4,7 +4,7 @@
 Pick a platform, design and config from the designs in the ORFS flow directory, the number of
 CPU cores, and the stage range, then run. Reports, logs and debug information have their own tabs.
 
-Usage: python3 gui/orfs_app.py [--flow DIR]
+Usage: python3 gui/orfs_app.py [--flow DIR]   (or orfs-flow-runner, when installed from the .deb)
 
 Needs GTK 3 through PyGObject (on Ubuntu: sudo apt install python3-gi gir1.2-gtk-3.0).
 """
@@ -31,10 +31,19 @@ from gi.repository import Gdk, GLib, Gtk, Pango  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flow_gui import CHECK_COLUMNS, METRICS, evaluate, load_metrics, step_info  # noqa: E402
 
+VERSION = "1.0.0"
+APP_ID = "orfs-flow-runner"
 GUI_DIR = Path(__file__).resolve().parent
 ROOT = GUI_DIR.parent
-RUN_LOGS = ROOT / "run_logs"
-SETTINGS = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "orfs-flow-runner" / "settings.json"
+# Per-user files, so the app also works when installed read-only under /opt.
+SETTINGS = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config") / APP_ID / "settings.json"
+DATA_DIR = Path(os.environ.get("XDG_DATA_HOME") or Path.home() / ".local" / "share") / APP_ID
+CACHE_DIR = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache") / APP_ID
+RUN_LOGS = DATA_DIR / "run_logs"
+# Tools the flow needs: name, environment variable ORFS reads, and the flag that prints the version.
+TOOLS = [("openroad", "OPENROAD_EXE", "-version"), ("yosys", "YOSYS_EXE", "-V"), ("klayout", None, "-v")]
+# Where tools usually are when they are not on PATH (an app menu starts with a short PATH).
+TOOL_DIRS = ["/usr/local/bin", "/usr/bin", "/opt/openroad/bin", str(Path.home() / ".local" / "bin")]
 
 # ORFS stages in order: name, make target, clean target, result that marks the stage done, log prefix.
 STAGES = [
@@ -68,7 +77,8 @@ CSS = b"""
 
 
 def default_flow():
-    for cand in (os.environ.get("ORFS_FLOW"), ROOT / "OpenROAD-flow-scripts" / "flow", ROOT / "orfs" / "flow"):
+    for cand in (os.environ.get("ORFS_FLOW"), ROOT / "OpenROAD-flow-scripts" / "flow", ROOT / "orfs" / "flow",
+                 Path.home() / "OpenROAD-flow-scripts" / "flow"):
         if cand and (Path(cand) / "Makefile").exists():
             return Path(cand).resolve()
     return (ROOT / "orfs" / "flow").resolve()
@@ -94,11 +104,28 @@ def discover(flow):
     return out
 
 
-def flow_env():
+def tool_path(name, tools):
+    """The tool chosen in Tools…, else the one on PATH, else one in a usual install folder, else None."""
+    chosen = (tools or {}).get(name)
+    if chosen:
+        return chosen if os.access(chosen, os.X_OK) else None
+    return shutil.which(name) or shutil.which(name, path=os.pathsep.join(TOOL_DIRS))
+
+
+def flow_env(tools):
     env = dict(os.environ)
-    # ORFS only uses tools from PATH when these are set; otherwise it looks under tools/install.
-    env.setdefault("OPENROAD_EXE", shutil.which("openroad") or "openroad")
-    env.setdefault("YOSYS_EXE", shutil.which("yosys") or "yosys")
+    dirs = []
+    for name, var, _ in TOOLS:
+        path = tool_path(name, tools)
+        if not path:
+            continue
+        if str(Path(path).parent) not in dirs:
+            dirs.append(str(Path(path).parent))
+        # ORFS only uses tools from PATH when these are set; otherwise it looks under tools/install.
+        if var and ((tools or {}).get(name) or var not in env):
+            env[var] = path
+    # Put the tools' folders first so make, OpenROAD and KLayout also find helpers that sit next to them.
+    env["PATH"] = os.pathsep.join(dirs + [env.get("PATH", "")])
     return env
 
 
@@ -254,7 +281,7 @@ class App(Gtk.Window):
             area = mon.get_workarea()
             w, h = min(w, int(area.width * 0.95)), min(h, int(area.height * 0.95))
         self.set_default_size(w, h)
-        self.set_icon_name("applications-engineering")
+        self.set_icon_name(APP_ID if Gtk.IconTheme.get_default().has_icon(APP_ID) else "applications-engineering")
         self.flow = flow
         self.platforms = {}
         self.vars = {}
@@ -274,6 +301,9 @@ class App(Gtk.Window):
         flow_btn = Gtk.Button(label="Flow folder…", tooltip_text="Choose the ORFS flow directory")
         flow_btn.connect("clicked", self.choose_flow)
         hb.pack_start(flow_btn)
+        tools_btn = Gtk.Button(label="Tools…", tooltip_text="Choose the OpenROAD, Yosys and KLayout programs")
+        tools_btn.connect("clicked", self.choose_tools)
+        hb.pack_start(tools_btn)
 
         paned = Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL, position=380)
         paned.pack1(self.build_side(), False, False)
@@ -296,6 +326,14 @@ class App(Gtk.Window):
         GLib.timeout_add(250, self.tick_output)
         GLib.timeout_add_seconds(3, self.tick_status)
         threading.Thread(target=self.probe_env, daemon=True).start()
+        if not (flow / "Makefile").exists():
+            GLib.idle_add(self.ask_for_flow)
+
+    def ask_for_flow(self):
+        self.message("No ORFS flow folder found yet. Choose the flow/ folder of your OpenROAD-flow-scripts "
+                     "checkout (it can be changed later with Flow folder…).")
+        self.choose_flow()
+        return False
 
     # ---------- settings ----------
     def load_settings(self):
@@ -308,12 +346,49 @@ class App(Gtk.Window):
         s = {"flow": str(self.flow), "platform": self.platform_cb.get_active_id(),
              "design": self.design_cb.get_active_id(), "config": self.config_cb.get_active_id(),
              "cores": self.cores_cb.get_active_id(), "from": self.from_cb.get_active_id(),
-             "to": self.to_cb.get_active_id()}
+             "to": self.to_cb.get_active_id(), "tools": self.tools()}
         try:
             SETTINGS.parent.mkdir(parents=True, exist_ok=True)
             SETTINGS.write_text(json.dumps(s, indent=1))
         except OSError:
             pass
+
+    def tools(self):
+        return self.settings.get("tools") or {}
+
+    def choose_tools(self, *_):
+        dlg = Gtk.Dialog(title="Tools", transient_for=self, modal=True)
+        dlg.add_buttons("Cancel", Gtk.ResponseType.CANCEL, "Save", Gtk.ResponseType.OK)
+        grid = Gtk.Grid(column_spacing=10, row_spacing=8, margin=12)
+        grid.attach(Gtk.Label(label="Pick each program, or leave it on Automatic to use the one on PATH\n"
+                                    f"(or in {', '.join(TOOL_DIRS)}).", xalign=0), 0, 0, 3, 1)
+        pickers = {}
+        for row, (name, _, _) in enumerate(TOOLS, 1):
+            chosen = self.tools().get(name)
+            found = tool_path(name, {})
+            pick = Gtk.FileChooserButton(title=f"Choose {name}", action=Gtk.FileChooserAction.OPEN, hexpand=True)
+            if chosen:
+                pick.set_filename(chosen)
+            auto = Gtk.Button(label="Automatic",
+                              tooltip_text=f"Use {found}" if found else f"{name} was not found on PATH")
+            auto.connect("clicked", lambda _b, w=pick: w.unselect_all())
+            grid.attach(Gtk.Label(label=name, xalign=0), 0, row, 1, 1)
+            grid.attach(pick, 1, row, 1, 1)
+            grid.attach(auto, 2, row, 1, 1)
+            pickers[name] = pick
+        dlg.get_content_area().add(grid)
+        dlg.show_all()
+        if dlg.run() == Gtk.ResponseType.OK:
+            tools = {n: w.get_filename() for n, w in pickers.items() if w.get_filename()}
+            bad = [p for p in tools.values() if not os.access(p, os.X_OK) or Path(p).is_dir()]
+            if bad:
+                self.message(f"Not a program: {', '.join(bad)}")
+            else:
+                self.settings["tools"] = tools
+                self.save_settings()
+                threading.Thread(target=self.probe_env, daemon=True).start()
+                self.on_config()
+        dlg.destroy()
 
     # ---------- left panel ----------
     def build_side(self):
@@ -667,7 +742,7 @@ class App(Gtk.Window):
     def fetch_vars(self, gen, cfg):
         try:
             out = subprocess.run(["make", f"DESIGN_CONFIG={cfg}"] + [f"print-{v}" for v in MAKE_VARS],
-                                 cwd=self.flow, env=flow_env(), capture_output=True, text=True, timeout=60)
+                                 cwd=self.flow, env=flow_env(self.tools()), capture_output=True, text=True, timeout=60)
             vals, err = {}, None
             for line in out.stdout.splitlines():
                 k, sep, v = line.partition(": ")
@@ -775,7 +850,7 @@ class App(Gtk.Window):
         log = RUN_LOGS / (f"{self.platform_cb.get_active_id()}_{nick}_{variant}_{self.from_cb.get_active_id()}-"
                           f"{self.to_cb.get_active_id()}_{time.strftime('%Y%m%d_%H%M%S')}.log")
         try:
-            self.job = Job(cmd, str(self.flow), flow_env(), log, self.on_job_exit)
+            self.job = Job(cmd, str(self.flow), flow_env(self.tools()), log, self.on_job_exit)
         except OSError as e:
             self.message(f"Could not start the run: {e}")
             return
@@ -999,20 +1074,22 @@ class App(Gtk.Window):
     # ---------- debug actions ----------
     def probe_env(self):
         rows = [("Flow directory", str(self.flow))]
-        for tool, args in (("openroad", ["-version"]), ("yosys", ["-V"]), ("klayout", ["-v"])):
-            path = shutil.which(tool)
+        tools = self.tools()
+        for tool, _, flag in TOOLS:
+            path = tool_path(tool, tools)
             if not path:
-                rows.append((tool, "NOT FOUND on PATH"))
+                rows.append((tool, f"NOT FOUND: {tools[tool]} is not a program" if tools.get(tool)
+                             else "NOT FOUND on PATH; choose it with Tools…"))
                 continue
             try:
-                out = subprocess.run([path] + args, capture_output=True, text=True, timeout=20,
+                out = subprocess.run([path, flag], capture_output=True, text=True, timeout=20,
                                      env=dict(os.environ, QT_QPA_PLATFORM="offscreen"))
                 ver = (out.stdout or out.stderr).strip().splitlines()
                 rows.append((tool, f"{ver[0] if ver else '?'}  ({path})"))
             except (OSError, subprocess.TimeoutExpired) as e:
                 rows.append((tool, f"{path}: {e}"))
         try:
-            yhelp = subprocess.run([shutil.which("yosys") or "yosys", "-p", "help read_slang"],
+            yhelp = subprocess.run([tool_path("yosys", tools) or "yosys", "-p", "help read_slang"],
                                    capture_output=True, text=True, timeout=20).stdout
             rows.append(("yosys read_slang", "available" if "read_slang" in yhelp and "No such command" not in yhelp
                          else "missing (needed for slang designs such as cva6)"))
@@ -1021,6 +1098,7 @@ class App(Gtk.Window):
         total, avail = meminfo()
         rows.append(("CPU cores", str(os.cpu_count())))
         rows.append(("Memory", f"{fmt_bytes(avail)} available of {fmt_bytes(total)}"))
+        rows.append(("Run logs", str(RUN_LOGS)))
         try:
             rev = subprocess.run(["git", "-C", str(self.flow), "log", "-1", "--format=%h %s"],
                                  capture_output=True, text=True, timeout=10).stdout.strip()
@@ -1045,7 +1123,7 @@ class App(Gtk.Window):
 
         def work():
             try:
-                out = subprocess.run(target[:1] + ["-n"] + target[1:], cwd=self.flow, env=flow_env(),
+                out = subprocess.run(target[:1] + ["-n"] + target[1:], cwd=self.flow, env=flow_env(self.tools()),
                                      capture_output=True, text=True, timeout=120)
                 text = out.stdout + out.stderr
             except (OSError, subprocess.TimeoutExpired) as e:
@@ -1062,10 +1140,10 @@ class App(Gtk.Window):
         if not target or not cfg:
             return
         cmd = ["make", f"DESIGN_CONFIG={cfg}", f"gui_{target}"]
-        log = (GUI_DIR / ".cache" / "openroad_gui.log")
+        log = CACHE_DIR / "openroad_gui.log"
         log.parent.mkdir(parents=True, exist_ok=True)
         with open(log, "wb") as f:
-            subprocess.Popen(cmd, cwd=self.flow, env=flow_env(), stdout=f, stderr=subprocess.STDOUT,
+            subprocess.Popen(cmd, cwd=self.flow, env=flow_env(self.tools()), stdout=f, stderr=subprocess.STDOUT,
                              start_new_session=True)
         set_text(self.debug_tv, f"$ {shlex.join(cmd)}\nStarted. OpenROAD's output goes to {log}\n")
         self.set_status(f"Opening {target} in the OpenROAD GUI…")
@@ -1113,10 +1191,13 @@ class App(Gtk.Window):
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap = argparse.ArgumentParser(prog=APP_ID, description=__doc__.splitlines()[0])
     ap.add_argument("--flow", help="ORFS flow directory (default: last used, $ORFS_FLOW, "
-                                   "./OpenROAD-flow-scripts/flow, then ./orfs/flow)")
+                                   "./OpenROAD-flow-scripts/flow, ./orfs/flow, then ~/OpenROAD-flow-scripts/flow)")
+    ap.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
     args = ap.parse_args()
+    # Matches StartupWMClass in the .desktop file, so the dock groups the window under its menu entry.
+    GLib.set_prgname(APP_ID)
     saved = None
     try:
         saved = json.loads(SETTINGS.read_text()).get("flow")
