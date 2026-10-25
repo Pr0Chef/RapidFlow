@@ -31,7 +31,7 @@ from gi.repository import Gdk, GLib, Gtk, Pango  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flow_gui import CHECK_COLUMNS, METRICS, evaluate, load_metrics, step_info  # noqa: E402
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 APP_ID = "orfs-flow-runner"
 GUI_DIR = Path(__file__).resolve().parent
 ROOT = GUI_DIR.parent
@@ -897,10 +897,15 @@ class App(Gtk.Window):
         files = sorted(logs.glob("*.log")) if logs and logs.is_dir() else []
         busy = bool(self.job and self.job.running())
         done = self.stage_done()
+        # The first stage that is not done is the one a run is working on. Synthesis writes its log in place
+        # rather than as a .tmp.log, so a .tmp.log alone does not show it running.
+        current_stage = next((n for n in STAGE_NAMES if not done[n]), None)
         for name, _, _, _, prefix in STAGES:
             steps = [step_info(p) for p in files if p.name.startswith(prefix)]
             if done[name]:
                 state, color = "done", "pass"
+            elif busy and name == current_stage and any(s["mtime"] >= self.job.started for s in steps):
+                state, color = "running", "run"
             elif any(s["tmp"] for s in steps):
                 state, color = ("running", "run") if busy else ("interrupted", "fail")
             elif steps:
@@ -915,11 +920,14 @@ class App(Gtk.Window):
         if busy:
             rss, names = group_rss(self.job.proc.pid)
             _, avail = meminfo()
+            # The step being written: a .tmp.log, else the newest log written since the run started.
             current = max((p for p in files if p.name.endswith(".tmp.log")), key=lambda p: p.stat().st_mtime,
-                          default=None)
+                          default=None) or max((p for p in files if p.stat().st_mtime >= self.job.started),
+                                               key=lambda p: p.stat().st_mtime, default=None)
             tools = sorted({n for n in names if n in ("openroad", "yosys", "klayout")})
+            step = current.name.replace(".tmp.log", "").replace(".log", "") if current else ""
             self.set_status(f"Running {fmt_dur(time.time() - self.job.started)}"
-                            + (f" · step {current.name.replace('.tmp.log', '')}" if current else "")
+                            + (f" · step {step}" if step else "")
                             + (f" · {', '.join(tools)}" if tools else "")
                             + f" · using {fmt_bytes(rss)} · {fmt_bytes(avail)} free")
             if self.nb.get_current_page() == 2 and self.follow_log.get_active():
