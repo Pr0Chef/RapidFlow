@@ -5,8 +5,15 @@ and stage range from drop-down menus, press Run, and read the results in separat
 **Debug** tabs. It drives the stock ORFS Makefile, so a run here gives the same result as the same `make` command
 in a terminal.
 
+![ORFS Flow Runner synthesising CVA6](../docs/images/gui/running_parallel.png)
+
+The illustrated user guide, [docs/ORFS_Flow_Runner_user_guide.pdf](../docs/ORFS_Flow_Runner_user_guide.pdf), walks
+through every part of the app with screenshots from real CVA6 runs, including a stock against parallel `abc_new`
+comparison ([A/B synthesis run](#ab-synthesis-run-stock-and-parallel-abc_new) below).
+
 Contents: [Install](#install) · [Requirements](#requirements) · [Step by step](#step-by-step) · [The menus](#the-menus) ·
-[The tabs](#the-tabs) · [Common tasks](#common-tasks) · [Troubleshooting](#troubleshooting) · [Files](#files)
+[The tabs](#the-tabs) · [Common tasks](#common-tasks) · [A/B synthesis run](#ab-synthesis-run-stock-and-parallel-abc_new) ·
+[Troubleshooting](#troubleshooting) · [Files](#files)
 
 ## Install
 
@@ -24,7 +31,7 @@ The app ships as a Debian package for Ubuntu (and other Debian-based systems). I
 2. **Install it.** apt also installs GTK, PyGObject, make and KLayout if they are missing:
 
    ```bash
-   sudo apt install ./dist/orfs-flow-runner_1.0.0_all.deb
+   sudo apt install ./dist/orfs-flow-runner_1.0.1_all.deb
    ```
 
 3. **Install OpenROAD, Yosys and an ORFS checkout** if you don't have them; the package doesn't include them
@@ -36,6 +43,8 @@ The app ships as a Debian package for Ubuntu (and other Debian-based systems). I
 5. **Check Debug → Environment.** If openroad, yosys or klayout shows *NOT FOUND*, click **Tools…** in the title
    bar and choose the program. *Automatic* uses the one on `PATH`, else one in `/usr/local/bin`, `/usr/bin`,
    `/opt/openroad/bin` or `~/.local/bin`.
+
+   ![Tools dialog](../docs/images/gui/tools.png)
 
 To update, build and install the newer `.deb` the same way. To remove it: `sudo apt remove orfs-flow-runner`
 (your settings and run logs in your home folder are kept).
@@ -107,7 +116,7 @@ the choices and the run time change.
 
 10. **Press Run.** The **Run output** tab streams the output (errors red, warnings amber). The **Stages** list
     moves each stage from *not built* to *running* to *done*, with its runtime and peak memory. The status bar
-    shows the current step and memory use.
+    shows the current step (for example `1_2_yosys`), the tool and memory use.
 
 11. **Wait for `>> exit code 0`.** The status bar then says *Run finished*. A non-zero exit code means a step
     failed: see [Troubleshooting](#troubleshooting).
@@ -139,6 +148,8 @@ and finished stages are kept.
 The app remembers your choices for the next start.
 
 ## The tabs
+
+![QoR checks for CVA6 up to global routing](../docs/images/gui/qor.png)
 
 - **Run output:** live output of the current run.
 - **Reports:**
@@ -174,6 +185,38 @@ command** and start it with `systemd-run --user` as in the repo README's
 [Running unattended](../README.md#running-unattended). The app still shows that run's results and logs, but not
 its live status.
 
+## A/B synthesis run: stock and parallel abc_new
+
+`orfs/flow/designs/asap7/cva6/` has two configs for comparing Yosys builds on CVA6. Both include `config_hier.mk`
+and only change `FLOW_VARIANT`, so their results stay apart:
+
+| Config | Results in | Choose this Yosys in **Tools…** |
+| --- | --- | --- |
+| `config_hier_stock.mk` | `results/asap7/cva6/hier_stock` | a stock build, for example `/usr/local/bin/yosys` |
+| `config_hier_parallel.mk` | `results/asap7/cva6/hier_parallel` | the `yosys/` submodule build, `yosys/build/yosys` |
+
+1. Build Yosys from the submodule ([README, Step 2](../README.md#step-2-clone-this-repo-and-build-yosys)).
+2. Platform `asap7`, Design `cva6`, Config `config_hier_stock.mk`, To stage `synth`; set Yosys to the stock build
+   in **Tools…** and press **Run**.
+3. When it finishes, choose `config_hier_parallel.mk`, set Yosys to `yosys/build/yosys` and press **Run**.
+4. Compare the **Stages** times and the end of each variant's `1_2_yosys.log` (`Took … seconds: abc_new` and the
+   time per pass).
+
+Measured from the app on an i5-1235U (8 threads, 10 GB), one run each, `NUM_CORES=8`:
+
+| Measure | Stock (0.69+274) | Parallel (0.69+280) |
+| --- | --- | --- |
+| Whole synthesis | 47 min 55 s | 39 min 9 s |
+| `1_2_yosys` step | 2,771 s | 2,291 s |
+| `abc_new` inside it | 1,496 s | 1,150 s |
+| Peak memory | 1.0 GB | 1.0 GB |
+| Netlist | 115,493 instances, 18,297.4 µm² | identical, apart from the Yosys version comment |
+
+![Wall time of the Yosys step and abc_new](../docs/images/gui/chart_wall.png)
+
+At most 4 `yosys-abc` processes ran at once: Yosys's own serial work around each ABC call (`write_xaiger2` alone
+takes 467 s) caps the saving. The guide's section 7 has the method and the per-run detail.
+
 ## Troubleshooting
 
 | Problem | What to do |
@@ -197,6 +240,8 @@ Limits: one run at a time per window; only runs started from the app show as *ru
 | `gui/flow_gui.py` | the CVA6 web console; the app reuses its metric definitions, so keep both together |
 | `gui/install_launcher.sh` | adds or removes a menu and Desktop launcher for running from the checkout |
 | `gui/packaging/build_deb.sh` | builds the `.deb`; `orfs-flow-runner.desktop` and `.svg` are its menu entry and icon |
+| `docs/ORFS_Flow_Runner_user_guide.pdf` | the illustrated user guide; `docs/images/gui/` has the screenshots used in this README |
+| `orfs/flow/designs/asap7/cva6/config_hier_{stock,parallel}.mk` | the A/B configs above |
 | `~/.config/orfs-flow-runner/settings.json` | last flow folder, menu choices and the programs chosen with **Tools…** |
 | `~/.local/share/orfs-flow-runner/run_logs/` | one full log per run: `<platform>_<design>_<variant>_<from>-<to>_<date>_<time>.log` |
 | `~/.cache/orfs-flow-runner/` | OpenROAD GUI log; safe to delete |

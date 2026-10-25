@@ -222,11 +222,14 @@ being torn down under memory pressure.
 
 `gui/orfs_app.py` is a desktop application (GTK 3) that can run any design in the ORFS flow directory, not
 only CVA6. Install it as a Debian package, which adds it to the app menu, or run it straight from the checkout.
-Step-by-step instructions are in [gui/README.md](gui/README.md#install).
+Step-by-step instructions are in [gui/README.md](gui/README.md#install), and the illustrated user guide with
+screenshots of real CVA6 runs is [docs/ORFS_Flow_Runner_user_guide.pdf](docs/ORFS_Flow_Runner_user_guide.pdf).
+
+![ORFS Flow Runner synthesising CVA6](docs/images/gui/running_parallel.png)
 
 ```bash
 gui/packaging/build_deb.sh                           # builds dist/orfs-flow-runner_<version>_all.deb
-sudo apt install ./dist/orfs-flow-runner_1.0.0_all.deb   # installs under /opt, with its dependencies
+sudo apt install ./dist/orfs-flow-runner_1.0.1_all.deb   # installs under /opt, with its dependencies
 orfs-flow-runner                                     # or start ORFS Flow Runner from the app menu
 python3 gui/orfs_app.py --flow /path/to/OpenROAD-flow-scripts/flow   # without installing
 ```
@@ -321,9 +324,20 @@ it, on an 8-thread i5-1235U with 10 GB RAM:
 
 The mapped cells match the sequential run in every module (818,111 cells), and `-j 4` and `-j 8` give byte-identical
 netlists. The speedup is limited by serial Yosys work around ABC, chiefly whole-design buffer normalization in
-`write_xaiger2` and `portarcs` (about 740 s). A full ORFS run end to end with this build has not been done yet. The
-design, the two bugs found on CVA6 and the open work are in
+`write_xaiger2` and `portarcs` (about 740 s). The design, the two bugs found on CVA6 and the open work are in
 [docs/Parallel_abc_new_in_Yosys.pdf](docs/Parallel_abc_new_in_Yosys.pdf).
+
+A full ORFS synthesis of hierarchical CVA6, run from the desktop app with each build in turn
+(`config_hier_stock.mk` and `config_hier_parallel.mk`, `NUM_CORES=8`), gives:
+
+| Build | Whole synthesis | `1_2_yosys` step | `abc_new` |
+| --- | --- | --- | --- |
+| Stock Yosys 0.69+274 | 47 min 55 s | 2,771 s | 1,496 s |
+| Submodule 0.69+280, parallel `abc_new` | 39 min 9 s | 2,291 s | 1,150 s |
+
+The two netlists are identical apart from the Yosys version comment. The method and charts are in section 7 of
+[docs/ORFS_Flow_Runner_user_guide.pdf](docs/ORFS_Flow_Runner_user_guide.pdf). A run through to GDS with this build has
+not been done yet.
 
 ## Status
 
@@ -349,6 +363,10 @@ interrupted by memory pressure and has not finished, so no `6_final.gds` exists 
 
 - `CVA6_asap7_synthesis_log.pdf`: write-up of the work, the results and the problems hit.
 - `docs/Parallel_abc_new_in_Yosys.pdf`: change report for the parallel `abc_new` work.
+- `docs/ORFS_Flow_Runner_user_guide.pdf`: illustrated user guide for the desktop app, with a stock against parallel
+  `abc_new` synthesis run of CVA6; `docs/images/gui/` holds the screenshots and chart used in the READMEs.
+- `orfs/flow/designs/asap7/cva6/config_hier_stock.mk`, `config_hier_parallel.mk`: the configs of that A/B run
+  (same as `config_hier.mk`, separate `FLOW_VARIANT`).
 - `report_assets/`: placement layout image and the script that renders it.
 - `gui/packaging/`: builds the ORFS Flow Runner `.deb` (`build_deb.sh`) with its menu entry and icon.
 - `orfs_overlay/designs/sky130hd/cva6/`: an unfinished sky130hd attempt (slang frontend, flop-based RAM
