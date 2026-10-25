@@ -11,3 +11,5 @@
 # GUI layout renders
 /gui/.cache/
 __pycache__/
+# built packages
+/dist/

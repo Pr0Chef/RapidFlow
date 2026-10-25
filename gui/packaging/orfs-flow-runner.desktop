@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=ORFS Flow Runner
+Comment=Run OpenROAD-flow-scripts designs from RTL to GDS
+Exec=orfs-flow-runner
+Icon=orfs-flow-runner
+Terminal=false
+Categories=Development;Electronics;
+Keywords=OpenROAD;ORFS;Yosys;RTL;GDS;EDA;
+StartupWMClass=orfs-flow-runner

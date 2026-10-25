@@ -18,6 +18,7 @@ These are the versions the flow was run with. Other versions may work but were n
 | Yosys | `0.69+274` (git `7513f8df8`), with the built-in `read_slang` frontend | [Yosys](https://github.com/YosysHQ/yosys), or built by ORFS (Step 1). The slang frontend comes from [yosys-slang](https://github.com/povik/yosys-slang) |
 | KLayout | `0.28.16`, only for the final GDS step | [klayout.de/build.html](https://www.klayout.de/build.html), or `apt` on Ubuntu |
 | GNU Make, Python 3, Git | any recent | your package manager |
+| `dpkg-deb` | any recent, only to build the GUI's `.deb` | part of `dpkg` on Debian and Ubuntu |
 | Memory | 16 GB or more recommended | detailed routing peaks at about 7 GB |
 
 Docs: [ORFS documentation](https://openroad-flow-scripts.readthedocs.io/en/latest/) ·
@@ -195,14 +196,17 @@ being torn down under memory pressure.
 ### Desktop app: ORFS Flow Runner
 
 `gui/orfs_app.py` is a desktop application (GTK 3) that can run any design in the ORFS flow directory, not
-only CVA6. It needs `python3-gi` and `gir1.2-gtk-3.0`, which Ubuntu desktops already have.
-Step-by-step instructions are in [gui/README.md](gui/README.md).
+only CVA6. Install it as a Debian package, which adds it to the app menu, or run it straight from the checkout.
+Step-by-step instructions are in [gui/README.md](gui/README.md#install).
 
 ```bash
-python3 gui/orfs_app.py                              # last used flow, else ./OpenROAD-flow-scripts/flow, else ./orfs/flow
-python3 gui/orfs_app.py --flow /path/to/OpenROAD-flow-scripts/flow
-gui/install_launcher.sh                              # optional: add it to the app menu and the Desktop
+gui/packaging/build_deb.sh                           # builds dist/orfs-flow-runner_<version>_all.deb
+sudo apt install ./dist/orfs-flow-runner_1.0.0_all.deb   # installs under /opt, with its dependencies
+orfs-flow-runner                                     # or start ORFS Flow Runner from the app menu
+python3 gui/orfs_app.py --flow /path/to/OpenROAD-flow-scripts/flow   # without installing
 ```
+
+OpenROAD, Yosys and ORFS are installed separately; if the app doesn't find them, choose them with **Tools…**.
 
 The left panel has drop-down menus for everything a run needs:
 
@@ -217,7 +221,7 @@ The left panel has drop-down menus for everything a run needs:
 The plan box shows the exact `make` commands and what they will delete before you press Run. Re-running from a
 stage runs `make clean_<stage>` for that stage and every later one, then `make <to-stage>`; you are asked to
 confirm first. The stage list shows each stage as done, running, interrupted or not built, with its runtime and
-peak memory. Every run is logged to `run_logs/`.
+peak memory. Every run is logged to `~/.local/share/orfs-flow-runner/run_logs/`.
 
 The tabs on the right:
 
@@ -289,6 +293,7 @@ interrupted by memory pressure and has not finished, so no `6_final.gds` exists 
 
 - `CVA6_asap7_synthesis_log.pdf`: write-up of the work, the results and the problems hit.
 - `report_assets/`: placement layout image and the script that renders it.
+- `gui/packaging/`: builds the ORFS Flow Runner `.deb` (`build_deb.sh`) with its menu entry and icon.
 - `orfs_overlay/designs/sky130hd/cva6/`: an unfinished sky130hd attempt (slang frontend, flop-based RAM
   stand-ins). It needs the sky130hd platform from a full ORFS checkout and never completed.
 
